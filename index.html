@@ -74,7 +74,7 @@ html{height:-webkit-fill-available}
 .shell.collapsed .team-chip{justify-content:center;padding:8px;margin-bottom:4px}
 
 /* ── Topbar ── */
-.topbar{background:rgba(4,10,6,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;position:sticky;top:0;z-index:20}
+.topbar{background:rgb(4,10,6);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;position:sticky;top:0;z-index:20}
 .topbar-title{font-family:'Impact','Arial Narrow',Arial,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--text);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .topbar-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:0 12px;height:32px;width:180px}
 .topbar-search input{background:none;border:none;outline:none;font-size:12px;color:var(--text);width:100%}
@@ -99,7 +99,7 @@ html{height:-webkit-fill-available}
 .view::-webkit-scrollbar-thumb{background:var(--dim);border-radius:999px}
 
 /* ── Bottom nav (mobile only) ── */
-.bottom-nav{display:none;height:auto;min-height:64px;padding:4px 8px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--border);background:rgba(6,13,8,.98);backdrop-filter:blur(10px);flex-shrink:0;gap:2px;grid-column:1/-1}
+.bottom-nav{display:none;height:auto;min-height:64px;padding:4px 8px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--border);background:rgb(6,13,8);flex-shrink:0;gap:2px;grid-column:1/-1}
 .bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;cursor:pointer;padding:6px 2px;border-radius:12px;color:var(--dim);transition:all .15s}
 .bnav-btn.active{color:var(--green);background:rgba(0,229,100,.06)}
 .bnav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
@@ -813,23 +813,26 @@ html{height:-webkit-fill-available}
 .auth-forgot:hover{color:var(--text)}
 .auth-note{text-align:center;font-size:10px;color:var(--dim);margin-top:14px}
 /* ══ FIFA UPGRADE (preview branch fifa-redesign-preview) ══ */
-.fc{position:relative;cursor:pointer;filter:drop-shadow(0 8px 16px rgba(0,0,0,.6));transition:transform .18s;width:100%;aspect-ratio:2/2.95;font-family:system-ui,-apple-system,Arial,sans-serif}
+.fc{position:relative;cursor:pointer;transition:transform .18s;width:100%;aspect-ratio:2/2.95;font-family:system-ui,-apple-system,Arial,sans-serif}
 .fc:hover{transform:translateY(-3px) scale(1.02)}
+.fc::before{content:'';position:absolute;inset:4% 3% -3%;clip-path:polygon(0 7%,9% 0,91% 0,100% 7%,100% 90%,50% 100%,0 90%);background:rgba(0,0,0,.55);filter:blur(7px);pointer-events:none}
 .fc-in{position:absolute;inset:0;clip-path:polygon(0 7%,9% 0,91% 0,100% 7%,100% 90%,50% 100%,0 90%);overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:9% 8% 13%;color:var(--fc-tx)}
-.fc-in::before{content:'';position:absolute;inset:3px;clip-path:inherit;border:0;pointer-events:none;background:repeating-linear-gradient(120deg,rgba(255,255,255,.07) 0 2px,transparent 2px 9px);mix-blend-mode:overlay}
+.fc-in::before{content:'';position:absolute;inset:3px;clip-path:inherit;border:0;pointer-events:none;background:repeating-linear-gradient(120deg,rgba(255,255,255,.07) 0 2px,transparent 2px 9px);opacity:.6}
 .fc-gold{--fc-tx:#2a1c00;--fc-acc:#7a5300}
 .fc-gold .fc-in{background:linear-gradient(155deg,#fff0a6 0%,#e7c45a 18%,#c99a2e 38%,#f7df86 52%,#b9862a 70%,#e8c65c 86%,#8c6114 100%)}
 .fc-silver{--fc-tx:#1c2128;--fc-acc:#4d5663}
 .fc-silver .fc-in{background:linear-gradient(155deg,#ffffff 0%,#d6dbe2 18%,#a7afba 38%,#eef1f5 52%,#9199a5 70%,#cfd5dc 86%,#6d7480 100%)}
 .fc-bronze{--fc-tx:#2a1407;--fc-acc:#6b3517}
 .fc-bronze .fc-in{background:linear-gradient(155deg,#f6cfa8 0%,#d79a68 18%,#a8643a 38%,#e9b78b 52%,#8f4f27 70%,#c98a5c 86%,#5d2f14 100%)}
-.fc-inform{--fc-tx:#E9FFF1;--fc-acc:#00E564;filter:drop-shadow(0 0 10px rgba(0,229,100,.75)) drop-shadow(0 8px 16px rgba(0,0,0,.6));animation:fcGlow 2.2s ease-in-out infinite}
+.fc-inform{--fc-tx:#E9FFF1;--fc-acc:#00E564}
+.fc-inform::before{background:rgba(0,229,100,.85);inset:-2% -3% -1%;filter:blur(9px);animation:fcGlow 2.2s ease-in-out infinite;will-change:opacity}
 .fc-inform .fc-in{background:radial-gradient(120% 70% at 50% 0%,rgba(0,229,100,.35),transparent 60%),linear-gradient(160deg,#04140a 0%,#0a2a17 45%,#03100a 100%)}
 .fc-inform .fc-in::after{content:'';position:absolute;inset:0;clip-path:inherit;box-shadow:inset 0 0 0 2px rgba(0,229,100,.9),inset 0 0 18px rgba(0,229,100,.45);pointer-events:none}
-@keyframes fcGlow{0%,100%{filter:drop-shadow(0 0 6px rgba(0,229,100,.55)) drop-shadow(0 8px 16px rgba(0,0,0,.6))}50%{filter:drop-shadow(0 0 16px rgba(0,229,100,.95)) drop-shadow(0 8px 16px rgba(0,0,0,.6))}}
+@keyframes fcGlow{0%,100%{opacity:.45}50%{opacity:.95}}
 .fc-shine{position:absolute;inset:0;clip-path:polygon(0 7%,9% 0,91% 0,100% 7%,100% 90%,50% 100%,0 90%);pointer-events:none;overflow:hidden;z-index:4}
-.fc-shine::after{content:'';opacity:.6;position:absolute;top:-20%;bottom:-20%;width:45%;left:-60%;background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.0) 20%,rgba(255,255,255,.65) 50%,rgba(255,255,255,0) 80%,transparent 100%);transform:skewX(-18deg);animation:fcShine 4.2s ease-in-out infinite;animation-delay:var(--sd,0s)}
-@keyframes fcShine{0%{left:-60%}38%{left:130%}100%{left:130%}}
+.fc-shine::after{content:'';opacity:.6;position:absolute;top:-20%;bottom:-20%;width:45%;left:-60%;background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,0) 20%,rgba(255,255,255,.65) 50%,rgba(255,255,255,0) 80%,transparent 100%);transform:translateX(0) skewX(-18deg);will-change:transform;animation:fcShine 6s ease-in-out infinite;animation-delay:var(--sd,0s)}
+@keyframes fcShine{0%{transform:translateX(0) skewX(-18deg)}30%{transform:translateX(430%) skewX(-18deg)}100%{transform:translateX(430%) skewX(-18deg)}}
+@media (prefers-reduced-motion:reduce){.fc-shine::after,.fc-inform::before{animation:none}}
 .fc-top{position:absolute;left:9%;top:9%;display:flex;flex-direction:column;align-items:center;z-index:2;line-height:1}
 .fc-ovr{font-family:'Impact','Arial Narrow',Arial,sans-serif;font-size:clamp(22px,8.5vw,40px);line-height:.95}
 .fc-pos{font-size:clamp(9px,2.7vw,13px);font-weight:900;letter-spacing:.5px;margin-top:2px}
@@ -854,6 +857,7 @@ html{height:-webkit-fill-available}
 .fc-xl{width:240px}
 .fc-xl .fc-ovr{font-size:54px}.fc-xl .fc-pos{font-size:16px}.fc-xl .fc-init{font-size:38px}.fc-xl .fc-banner{font-size:21px}.fc-xl .fc-st b{font-size:21px}.fc-xl .fc-st span{font-size:12px}
 #rosterGrid .fc{min-width:0}
+#rosterGrid .fc-cell{content-visibility:auto;contain-intrinsic-size:auto 260px;padding:6px 4px 10px;min-width:0}
 .fc-sm{width:62px;flex-shrink:0}
 .fc-sm .fc-ovr{font-size:17px}.fc-sm .fc-pos{font-size:7px}.fc-sm .fc-num,.fc-sm .fc-badges,.fc-sm .fc-stats,.fc-sm .fc-tag{display:none}.fc-sm .fc-init{font-size:11px;border-width:1px}.fc-sm .fc-banner{font-size:7px;padding:2px}.fc-sm .fc-in{padding:9% 6% 16%}.fc-sm .fc-portrait{display:none}.fc-sm .fc-top{left:50%;transform:translateX(-50%);top:13%}.fc-sm .fc-ovr{font-size:22px}.fc-sm .fc-pos{font-size:8px}.fc-sm .fc-banner{position:absolute;bottom:24%;left:-5%;width:110%;margin:0;font-size:7px}
 /* tier legend under roster */
@@ -1935,6 +1939,13 @@ function isInForm(p){const d=lastDelta(p);return !!d&&d.ovr>=2;}
 function deltaHtml(v){if(v===null||v===undefined)return '';if(v>0)return `<span class="dl-up">▲${v}</span>`;if(v<0)return `<span class="dl-dn">▼${-v}</span>`;return `<span class="dl-eq">–</span>`;}
 function _esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 let _fcShineSeq=0;
+const _photoCache=new Map();
+function photoSrc(d){
+  if(!d||d.slice(0,5)!=='data:')return d||'';
+  let u=_photoCache.get(d);if(u)return u;
+  try{const i=d.indexOf(',');const mime=(d.slice(5,i).split(';')[0])||'image/jpeg';const bin=atob(d.slice(i+1));const a=new Uint8Array(bin.length);for(let k=0;k<bin.length;k++)a[k]=bin.charCodeAt(k);u=URL.createObjectURL(new Blob([a],{type:mime}));}catch(e){u=d;}
+  _photoCache.set(d,u);return u;
+}
 function fifaCardHtml(p,opts={}){
   const tier=cardTier(p),inf=opts.noInform?false:isInForm(p);
   const size=opts.size?(' fc-'+opts.size):'';
@@ -1945,7 +1956,7 @@ function fifaCardHtml(p,opts={}){
     p.assists>0?`<span class="pc-ss-badge assists">A${p.assists}</span>`:'',
     p.potm>0?`<span class="pc-ss-badge potm">★${p.potm}</span>`:'',
     (p.pos==='GK'&&p.cs>0)?`<span class="pc-ss-badge cs">CS${p.cs}</span>`:''].join('');
-  const photo=p.photo?` fc-photo" style="background:url(${p.photo})`:'';
+  const photo=p.photo?` fc-photo" style="background:url(${photoSrc(p.photo)})`:'';
   const sd=((_fcShineSeq++)%6)*0.55;
   return `<div class="fc fc-${tier}${inf?' fc-inform':''}${size}" data-pname="${_esc(p.name)}" style="--sd:${sd}s">
     <div class="fc-in">
@@ -2376,7 +2387,7 @@ function renderCards(){
   const g=document.getElementById('rosterGrid');
   if(!filtered.length){g.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:32px 0;color:#3D5845;font-size:13px;font-weight:700">No players found</div>`;return;}
   const legend=`<div class="fc-legend" style="grid-column:1/-1"><span><i style="background:linear-gradient(135deg,#fff0a6,#c99a2e)"></i>Gold 75+</span><span><i style="background:linear-gradient(135deg,#fff,#9199a5)"></i>Silver 65–74</span><span><i style="background:linear-gradient(135deg,#f6cfa8,#8f4f27)"></i>Bronze &lt;65</span><span><i style="background:#04140a;box-shadow:inset 0 0 0 1.5px #00E564"></i>In Form</span></div>`;
-  g.innerHTML=legend+filtered.map(p=>fifaCardHtml(p)).join('');
+  g.innerHTML=legend+filtered.map(p=>'<div class="fc-cell">'+fifaCardHtml(p)+'</div>').join('');
   g.querySelectorAll('.fc').forEach(c=>{
     const p=activeTeam.players.find(x=>x.name===c.dataset.pname);
     if(p)c.addEventListener('click',()=>openPlayerModal(p));
@@ -2413,7 +2424,7 @@ function openPlayerModal(p, subIndex=null, pitchIdx=null){
   const tierLabel={gold:'Gold',elite:'Elite',silver:'Silver'}[p.tier]||p.tier;
   const tierBg={gold:'linear-gradient(160deg,#3a2a00,#1a1000)',elite:'linear-gradient(160deg,#001d2e,#001020)',silver:'linear-gradient(160deg,#1a1a1a,#0d0d0d)'}[p.tier]||'';
   const tierAccent={gold:'#FFD700',elite:'#5AABFF',silver:'#B0B0B0'}[p.tier]||'#00E564';
-  const avatarStyle=p.photo?`background:url(${p.photo}) center/cover;color:transparent`:`background:${tierAccent}22;color:${tierAccent}`;
+  const avatarStyle=p.photo?`background:url(${photoSrc(p.photo)}) center/cover;color:transparent`:`background:${tierAccent}22;color:${tierAccent}`;
   body.innerHTML=`
     <div style="background:radial-gradient(circle at 50% 30%,${FC_TIER_COLOR[cardTier(p)]}33,transparent 65%);padding:18px 18px 14px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08)">
       ${fifaCardHtml(p,{size:'lg'})}
@@ -3768,11 +3779,21 @@ function _resizeImg(file,maxPx,cb){
       const c=document.createElement('canvas');
       c.width=img.width*s;c.height=img.height*s;
       c.getContext('2d').drawImage(img,0,0,c.width,c.height);
-      cb(c.toDataURL('image/jpeg',0.82));
+      cb(c.toDataURL('image/jpeg',0.72));
     };
     img.src=e.target.result;
   };
   r.readAsDataURL(file);
+}
+/* One-time: shrink any oversized stored photos (older uploads / imports) to 200px JPEG */
+function _shrinkDataUrl(d,maxPx,cb){const img=new Image();img.onload=()=>{const s=Math.min(maxPx/img.width,maxPx/img.height,1);const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',0.72));};img.onerror=()=>cb(null);img.src=d;}
+function migrateBigPhotos(){
+  const LIMIT=24000;const jobs=[];
+  TEAMS.forEach(t=>{(t.players||[]).forEach(p=>{if(p.photo&&p.photo.length>LIMIT)jobs.push(p);});});
+  if(COACH.photo&&COACH.photo.length>LIMIT)jobs.push(COACH);
+  if(!jobs.length)return;
+  let left=jobs.length,changed=0;
+  jobs.forEach(o=>_shrinkDataUrl(o.photo,200,d=>{if(d&&d.length<o.photo.length){o.photo=d;changed++;}if(--left===0&&changed){saveToStorage();if(activeTeam)renderCards();applyCoachUI();}}));
 }
 function applyCoachUI(){
   const init=COACH.initials||_coachInitials(COACH.name);
@@ -4056,16 +4077,18 @@ function showToast(msg){
 /* ══════════════════════════════════════════════
    LOCAL STORAGE — persist data across sessions
 ══════════════════════════════════════════════ */
+function _slim(arr){return JSON.stringify(arr.map(p=>p&&p.photo?{...p,photo:''}:p));}
+function _rehydratePhotos(arr){const all=TEAMS.flatMap(t=>t.players||[]);arr.forEach(p=>{if(p&&!p.photo){const f=all.find(x=>x.name===p.name&&x.photo);if(f)p.photo=f.photo;}});}
 function saveToStorage(){
   try{
     localStorage.setItem(_sk('teams'),JSON.stringify(TEAMS));
-    localStorage.setItem(_sk('pitch'),JSON.stringify(PITCH_PLAYERS));
-    localStorage.setItem(_sk('bench'),JSON.stringify(BENCH_PLAYERS));
+    localStorage.setItem(_sk('pitch'),_slim(PITCH_PLAYERS));
+    localStorage.setItem(_sk('bench'),_slim(BENCH_PLAYERS));
     localStorage.setItem(_sk('savedFormations'),JSON.stringify(SAVED_FORMATIONS));
     /* Per-team pitch so switching team chips never scrambles positions */
     if(activeTeam){
-      localStorage.setItem(_sk('pitch_'+activeTeam.id),JSON.stringify(PITCH_PLAYERS));
-      localStorage.setItem(_sk('bench_'+activeTeam.id),JSON.stringify(BENCH_PLAYERS));
+      localStorage.setItem(_sk('pitch_'+activeTeam.id),_slim(PITCH_PLAYERS));
+      localStorage.setItem(_sk('bench_'+activeTeam.id),_slim(BENCH_PLAYERS));
       localStorage.setItem(_sk('formations_'+activeTeam.id),JSON.stringify(SAVED_FORMATIONS));
     }
     localStorage.setItem(_sk('nextId'),String(_teamNextId));
@@ -4107,6 +4130,7 @@ function loadFromStorage(){
     if(en)_evNextId=+en;
     const co=localStorage.getItem(_sk('coach'));
     if(co)Object.assign(COACH,JSON.parse(co));
+    _rehydratePhotos(PITCH_PLAYERS);_rehydratePhotos(BENCH_PLAYERS);
     const ct=localStorage.getItem(_sk('customEvTypes'));
     if(ct)CUSTOM_EV_TYPES=JSON.parse(ct);else CUSTOM_EV_TYPES=[];
   }catch(e){}
@@ -4241,6 +4265,7 @@ function closeSyncModal(){
 
 function bootApp(){
   loadFromStorage();
+  setTimeout(migrateBigPhotos,1500);
   const ptn=document.getElementById('pitchTeamNm');
   if(ptn&&TEAMS.length)ptn.textContent=TEAMS[0].name;
   applyCoachUI();
