@@ -1250,7 +1250,7 @@ html.rr-loader-skip #rrLoader{display:none!important}
 .fut-corner{position:absolute;width:2px;height:2px;pointer-events:none;opacity:0}
 .fut-corner[data-c="tl"]{left:0;top:0}.fut-corner[data-c="tr"]{left:100%;top:0}
 .fut-corner[data-c="br"]{left:100%;top:100%}.fut-corner[data-c="bl"]{left:0;top:100%}
-.fut-pos-lab{position:absolute;transform:translate(-50%,12px);font-family:var(--font-display);font-size:11px;letter-spacing:1.1px;color:rgba(255,255,255,.88);text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 6px rgba(0,0,0,.6);pointer-events:none;z-index:1;text-transform:uppercase}
+.fut-pos-lab{position:absolute;transform:translate(-50%,8px);font-family:var(--font-display);font-size:10px;letter-spacing:1.1px;color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7);pointer-events:none;z-index:3;text-transform:uppercase}
 .pitch-slot{position:absolute;transform:translate(-50%,-50%);width:48px;height:62px;border:1.5px dashed rgba(255,255,255,.32);border-radius:4px;pointer-events:none;background:rgba(255,255,255,.03)}
 .pitch-slot.hot{border-color:#00E564;background:rgba(0,229,100,.22);box-shadow:0 0 12px rgba(0,229,100,.35)}
 .chem-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
@@ -1353,20 +1353,42 @@ html.rr-loader-skip #rrLoader{display:none!important}
   .fut-subres .sb-in{padding:1px 2px;font-size:6.5px}
 }
 @media (max-width:600px){
+  .fut-pcard{width:52px}
+  .fc-pk .fc-ovr{font-size:14px}
+  .fc-pk .fc-pos{font-size:7px}
+  .fc-pk .fc-banner{font-size:7px}
+  .fc-pk .fc-init{font-size:11px}
+  .fut-pos-lab{font-size:8px;letter-spacing:.6px;transform:translate(-50%,7px)}
+  .fut-shade{width:26px;height:9px}
+  .fut-persp{--fut-tilt:24deg}
   #matchMode .pitch-game-hud{padding:6px 8px}
   #matchMode .pgh-clock{font-size:20px}
   #matchMode .pgh-score{font-size:18px;letter-spacing:3px}
   #matchMode .pgh-start-btn,#matchMode .pgh-end-btn{padding:5px 10px;min-width:68px;font-size:9px}
   #matchMode .pitch-match-log{max-height:40px;padding:5px 8px}
   #matchMode .pga-btn{padding:7px 6px;font-size:9px}
-  #matchMode .fut-pcard{width:64px}
-  #matchMode .fc-pk .fc-ovr{font-size:17px}
-  #matchMode .fc-pk .fc-pos{font-size:8px}
-  #matchMode .fc-pk .fc-banner{font-size:8px}
+  #matchMode .fut-pcard{width:52px}
+  #matchMode .fc-pk .fc-ovr{font-size:14px}
+  #matchMode .fc-pk .fc-pos{font-size:7px}
+  #matchMode .fc-pk .fc-banner{font-size:7px}
   #matchMode .fut-stands{height:48px}
-  #matchMode .fut-persp{top:34px;padding:0 2px 2px}
+  #matchMode .fut-persp{top:34px;padding:0 2px 2px;--fut-tilt:24deg}
   #matchMode .match-chrome{padding:4px 8px 2px;gap:5px}
   #matchMode .match-subres{padding:4px 0 6px}
+}
+@media (max-width:600px) and (max-height:740px){
+  .fut-pcard{width:46px}
+  .fc-pk .fc-ovr{font-size:13px}
+  .fc-pk .fc-banner{font-size:6.5px}
+  .fut-persp{--fut-tilt:20deg;perspective:900px}
+  .fut-pos-lab{font-size:7px}
+  .fut-stands{height:40px}
+  .fut-persp{top:30px}
+  #matchMode .fut-pcard{width:46px}
+  #matchMode .fc-pk .fc-ovr{font-size:13px}
+  #matchMode .fc-pk .fc-banner{font-size:6.5px}
+  #matchMode .fut-stands{height:40px}
+  #matchMode .fut-persp{top:30px;--fut-tilt:20deg;perspective:900px}
 }
 @media (prefers-reduced-motion:reduce){
   .fut-pcard,.fut-world{transition:none}
@@ -2545,19 +2567,19 @@ function fifaCardHtml(p,opts={}){
    so old saved data and the Match-mode buttons keep working. ── */
 const FC_FORMATIONS={
   '11v11':{
-    defensive:{name:'4-4-2',slots:[['GK',50,96],['LB',8,70],['CB',35,75],['CB',65,75],['RB',92,70],['LM',8,44],['CM',35,50],['CM',65,50],['RM',92,44],['ST',30,13],['ST',70,13]]},
-    balanced:{name:'4-3-3',slots:[['GK',50,96],['LB',8,70],['CB',35,75],['CB',65,75],['RB',92,70],['CM',28,46],['CDM',50,56],['CM',72,46],['LW',8,15],['ST',50,11],['RW',92,15]]},
-    attacking:{name:'3-5-2',slots:[['GK',50,96],['CB',20,75],['CB',50,79],['CB',80,75],['LWB',6,49],['CM',32,46],['CDM',50,57],['CM',68,46],['RWB',94,49],['ST',30,13],['ST',70,13]]}
+    defensive:{name:'4-4-2',slots:[['GK',50,97],['LB',16,74],['CB',38,80],['CB',62,80],['RB',84,74],['LM',16,50],['CM',38,54],['CM',62,54],['RM',84,50],['ST',32,22],['ST',68,22]]},
+    balanced:{name:'4-3-3',slots:[['GK',50,97],['LB',16,74],['CB',38,80],['CB',62,80],['RB',84,74],['CM',28,50],['CDM',50,58],['CM',72,50],['LW',16,22],['ST',50,18],['RW',84,22]]},
+    attacking:{name:'3-5-2',slots:[['GK',50,97],['CB',24,80],['CB',50,84],['CB',76,80],['LWB',14,56],['CM',32,50],['CDM',50,60],['CM',68,50],['RWB',86,56],['ST',32,22],['ST',68,22]]}
   },
   '9v9':{
-    defensive:{name:'3-3-2',slots:[['GK',50,96],['CB',18,74],['CB',50,78],['CB',82,74],['LM',12,46],['CM',50,52],['RM',88,46],['ST',30,14],['ST',70,14]]},
-    balanced:{name:'3-2-3',slots:[['GK',50,96],['CB',18,74],['CB',50,78],['CB',82,74],['CM',30,52],['CM',70,52],['LW',10,16],['ST',50,12],['RW',90,16]]},
-    attacking:{name:'2-3-3',slots:[['GK',50,96],['CB',28,76],['CB',72,76],['LM',10,50],['CM',50,53],['RM',90,50],['LW',10,16],['ST',50,12],['RW',90,16]]}
+    defensive:{name:'3-3-2',slots:[['GK',50,97],['CB',22,78],['CB',50,82],['CB',78,78],['LM',18,52],['CM',50,56],['RM',82,52],['ST',32,22],['ST',68,22]]},
+    balanced:{name:'3-2-3',slots:[['GK',50,97],['CB',22,78],['CB',50,82],['CB',78,78],['CM',32,54],['CM',68,54],['LW',16,22],['ST',50,18],['RW',84,22]]},
+    attacking:{name:'2-3-3',slots:[['GK',50,97],['CB',32,80],['CB',68,80],['LM',16,54],['CM',50,56],['RM',84,54],['LW',16,22],['ST',50,18],['RW',84,22]]}
   },
   '7v7':{
-    defensive:{name:'3-2-1',slots:[['GK',50,96],['CB',16,74],['CB',50,78],['CB',84,74],['CM',28,48],['CM',72,48],['ST',50,15]]},
-    balanced:{name:'2-3-1',slots:[['GK',50,96],['CB',26,74],['CB',74,74],['LM',10,48],['CM',50,52],['RM',90,48],['ST',50,14]]},
-    attacking:{name:'2-1-3',slots:[['GK',50,96],['CB',26,74],['CB',74,74],['CM',50,52],['LW',12,16],['ST',50,12],['RW',88,16]]}
+    defensive:{name:'3-2-1',slots:[['GK',50,97],['CB',20,78],['CB',50,82],['CB',80,78],['CM',30,52],['CM',70,52],['ST',50,22]]},
+    balanced:{name:'2-3-1',slots:[['GK',50,97],['CB',30,80],['CB',70,80],['LM',16,52],['CM',50,56],['RM',84,52],['ST',50,22]]},
+    attacking:{name:'2-1-3',slots:[['GK',50,97],['CB',30,80],['CB',70,80],['CM',50,54],['LW',16,22],['ST',50,18],['RW',84,22]]}
   }
 };
 function fcFormation(format,slot){const f=FC_FORMATIONS[format]||FC_FORMATIONS['11v11'];return f[slot]||f.balanced;}
@@ -3804,6 +3826,32 @@ function renderPitchTokens(){
   if(typeof renderFutHud==='function')renderFutHud();
   _fcSyncSlotBtns();
   if(typeof _futH!=='undefined'){_futH=null;_futHAt=0;}
+  requestAnimationFrame(()=>_resolvePitchOverlaps('pitchOverlay'));
+}
+function _resolvePitchOverlaps(rootId){
+  const ids=rootId?[rootId]:['pitchOverlay','matchPitchOverlay'];
+  ids.forEach(id=>{
+    const o=document.getElementById(id);
+    if(!o)return;
+    if(o.offsetParent===null && getComputedStyle(o).display==='none')return;
+    const cards=[...o.querySelectorAll('.fut-pcard')];
+    if(cards.length<2)return;
+    const overlap=(a,b)=>{
+      const p=0.6;
+      return a.left+p<b.right-p&&a.right-p>b.left+p&&a.top+p<b.bottom-p&&a.bottom-p>b.top+p;
+    };
+    const any=()=>{
+      const rs=cards.map(c=>c.getBoundingClientRect());
+      for(let i=0;i<rs.length;i++)for(let j=i+1;j<rs.length;j++) if(overlap(rs[i],rs[j])) return true;
+      return false;
+    };
+    for(let step=0;step<10&&any();step++){
+      cards.forEach(c=>{
+        const w=parseFloat(getComputedStyle(c).width)||52;
+        if(w>40) c.style.width=Math.max(40,w-2)+'px';
+      });
+    }
+  });
 }
 function _fcSyncSlotBtns(){
   const fmt=activeTeam?activeTeam.format:'11v11';
@@ -4110,6 +4158,7 @@ function renderMatchPitchTokens(){
     const sub=(match.subOff&&match.subOff.name===p.name)?' sub-out':'';
     return `<div class="pitch-tok fut-pcard match-pcard${sub}" style="left:${p.cx}%;top:${p.cy}%;z-index:${10+Math.round(+p.cy||0)}" data-pi="${i}">${fifaCardHtml({...p,name:last},{size:'pk',badges:false})}</div>`;
   }).join('');
+  requestAnimationFrame(()=>_resolvePitchOverlaps('matchPitchOverlay'));
 }
 
 function renderMatchBench(){
