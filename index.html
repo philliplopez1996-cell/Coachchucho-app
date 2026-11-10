@@ -112,10 +112,34 @@ html{height:-webkit-fill-available}
 
 /* ── Bottom nav (mobile only) ── */
 .bottom-nav{display:none;height:auto;min-height:64px;padding:4px 8px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--border);background:rgb(6,13,8);flex-shrink:0;gap:2px;grid-column:1/-1}
-.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;cursor:pointer;padding:6px 2px;border-radius:12px;color:var(--dim);transition:all .15s}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;cursor:pointer;padding:6px 2px;border-radius:12px;color:var(--dim);transition:all .15s;position:relative}
 .bnav-btn.active{color:var(--green);background:rgba(0,229,100,.06)}
-.bnav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.bnav-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+.bnav-icon svg{width:22px;height:22px;display:block}
 .bnav-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+/* A — bold filled soccer-themed glyphs */
+.bnav-a .bnav-icon svg{fill:currentColor;stroke:none}
+.bnav-a .bnav-icon svg [fill="#060d08"],.bnav-b .bnav-icon svg [fill="#060d08"]{fill:#060d08}
+.bnav-a .bnav-btn.active{background:rgba(0,229,100,.1)}
+.bnav-a .bnav-btn.active .bnav-icon{transform:translateY(-1px)}
+/* B — chunky UT glyphs + green glow on the active tab */
+.bnav-b .bnav-icon svg{fill:currentColor;stroke:none;filter:drop-shadow(0 1px 0 rgba(0,0,0,.55))}
+.bnav-b .bnav-btn{border-radius:10px;padding:7px 2px 5px}
+.bnav-b .bnav-btn.active{color:#7cffb0;background:rgba(0,229,100,.14);box-shadow:inset 0 0 0 1px rgba(0,229,100,.45),0 0 14px rgba(0,229,100,.28)}
+.bnav-b .bnav-btn.active .bnav-icon{filter:drop-shadow(0 0 5px #00E564) drop-shadow(0 0 12px rgba(0,229,100,.7))}
+.bnav-b .bnav-btn.active .bnav-lbl{text-shadow:0 0 8px rgba(0,229,100,.7)}
+/* C — minimal duotone + animated active indicator */
+.bnav-c .bnav-icon svg{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.bnav-c .bnav-icon svg .acc{fill:#00E564;stroke:none}
+.bnav-c .bnav-btn{background:transparent;color:#5a7a64}
+.bnav-c .bnav-btn.active{color:var(--text);background:transparent}
+.bnav-c .bnav-btn.active .bnav-icon svg{stroke:var(--text)}
+.bnav-c .bnav-btn.active .bnav-icon svg .acc{fill:var(--green)}
+.bnav-c .bnav-btn::after{content:'';position:absolute;left:50%;bottom:3px;width:22px;height:3px;border-radius:99px;background:var(--green);box-shadow:0 0 8px rgba(0,229,100,.75);transform:translateX(-50%) scaleX(0);opacity:0;transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .2s}
+.bnav-c .bnav-btn.active::after{transform:translateX(-50%) scaleX(1);opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .bnav-c .bnav-btn::after{transition:none}
+}
 
 /* ── Roster: Teams List ── */
 .roster-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
@@ -1167,7 +1191,23 @@ html.rr-loader-skip #rrLoader{display:none!important}
 #view-pitch{padding:0;overflow:hidden}
 #view-pitch.active{display:flex;flex-direction:column}
 #view-pitch .pitch-mode-bar{padding:8px 12px 6px;position:relative;z-index:6;flex-shrink:0;background:linear-gradient(180deg,rgba(6,13,8,.78),rgba(6,13,8,.2) 80%,transparent)}
-#matchMode{padding:14px 16px 20px;overflow:auto;flex:1;min-height:0}
+#matchMode{padding:0;overflow:hidden;flex:1;min-height:0;flex-direction:column}
+#matchMode .match-chrome{flex-shrink:0;position:relative;z-index:6;padding:6px 10px 4px;display:flex;flex-direction:column;gap:6px;background:linear-gradient(180deg,rgba(6,13,8,.94),rgba(6,13,8,.28) 78%,transparent)}
+#matchMode .match-chrome-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#matchMode .match-chrome-row .pitch-game-actions{flex:1;min-width:150px}
+#matchMode .match-shape{display:flex;align-items:center;gap:8px;margin-left:auto}
+#matchMode .match-shape-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--dim);white-space:nowrap}
+#matchMode .pitch-game-hud{padding:7px 10px}
+#matchMode .pitch-match-log{max-height:52px;margin:0}
+#matchMode .pga-btn{padding:8px 8px}
+#matchMode .fut-arena{flex:1;min-height:0}
+#matchMode .fut-pcard{cursor:pointer}
+#matchMode .fut-pcard .fc{cursor:pointer}
+#matchMode .match-subres{flex-shrink:0}
+#matchMode .match-subres .bench-chips-list{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:6px;padding:4px 4px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#matchMode .match-subres .bench-chips-list::-webkit-scrollbar{display:none}
+#matchMode .match-subres .bench-chip-m{flex:0 0 auto;min-width:0;padding:6px 9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+#matchMode .match-subres .bcm-name{max-width:72px}
 .fut-regular{flex:1;min-height:0;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .fut-hud{flex-shrink:0;position:relative;z-index:7;padding:0 10px 6px}
 .fut-hud-bar{display:flex;align-items:center;gap:8px;background:rgba(6,10,8,.78);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:6px 8px;backdrop-filter:blur(8px)}
@@ -1274,21 +1314,32 @@ html.rr-loader-skip #rrLoader{display:none!important}
 
 /* Desktop / wide: FIFA-style floating side panels */
 @media (min-width:960px){
-  .fut-hud-bar{display:none}
-  .fut-panels{display:flex!important;position:absolute;inset:12px 12px auto;z-index:8;margin:0;pointer-events:none;justify-content:space-between}
-  .fut-panel{pointer-events:all;width:200px;flex:0 0 200px;background:rgba(8,10,10,.88)}
-  .fut-stands{height:64px}
-  .fut-persp{top:48px;padding:0 210px 8px;--fut-tilt:28deg;perspective:1400px}
-  .fut-world{width:100%;height:114%}
-  .fut-pcard{width:78px}
-  .fc-pk .fc-ovr{font-size:22px}
-  .fc-pk .fc-pos{font-size:10px}
-  .fc-pk .fc-banner{font-size:11px}
-  .fut-subres{padding:8px 80px 12px}
+  .fut-regular .fut-hud-bar{display:none}
+  .fut-regular .fut-panels{display:flex!important;position:absolute;inset:12px 12px auto;z-index:8;margin:0;pointer-events:none;justify-content:space-between}
+  .fut-regular .fut-panel{pointer-events:all;width:200px;flex:0 0 200px;background:rgba(8,10,10,.88)}
+  .fut-regular .fut-stands{height:64px}
+  .fut-regular .fut-persp{top:48px;padding:0 210px 8px;--fut-tilt:28deg;perspective:1400px}
+  .fut-regular .fut-world{width:100%;height:114%}
+  .fut-regular .fut-pcard{width:78px}
+  .fut-regular .fc-pk .fc-ovr{font-size:22px}
+  .fut-regular .fc-pk .fc-pos{font-size:10px}
+  .fut-regular .fc-pk .fc-banner{font-size:11px}
+  .fut-regular .fut-subres{padding:8px 80px 12px}
+  #matchMode .match-chrome{padding:10px 28px 6px}
+  #matchMode .fut-stands{height:64px}
+  #matchMode .fut-persp{top:48px;padding:0 48px 8px;--fut-tilt:28deg;perspective:1400px}
+  #matchMode .fut-world{width:100%;height:114%}
+  #matchMode .fut-pcard{width:70px}
+  #matchMode .fc-pk .fc-ovr{font-size:20px}
+  #matchMode .fc-pk .fc-pos{font-size:9px}
+  #matchMode .fc-pk .fc-banner{font-size:10px}
+  #matchMode .fut-subres{padding:8px 80px 12px}
+  #matchMode .pitch-match-log{max-height:72px}
 }
 @media (min-width:1280px){
-  .fut-pcard{width:84px}
-  .fut-persp{--fut-tilt:30deg;perspective:1500px}
+  .fut-regular .fut-pcard{width:84px}
+  .fut-regular .fut-persp,#matchMode .fut-persp{--fut-tilt:30deg;perspective:1500px}
+  #matchMode .fut-pcard{width:78px}
 }
 /* Landscape phones / short screens */
 @media (orientation:landscape) and (max-height:500px){
@@ -1315,6 +1366,22 @@ html.rr-loader-skip #rrLoader{display:none!important}
   .fut-subres .sb-card{flex-basis:42px}
   .fut-subres .fc-bn{width:40px}
   .fut-subres .sb-in{padding:1px 2px;font-size:6.5px}
+}
+@media (max-width:600px){
+  #matchMode .pitch-game-hud{padding:6px 8px}
+  #matchMode .pgh-clock{font-size:20px}
+  #matchMode .pgh-score{font-size:18px;letter-spacing:3px}
+  #matchMode .pgh-start-btn,#matchMode .pgh-end-btn{padding:5px 10px;min-width:68px;font-size:9px}
+  #matchMode .pitch-match-log{max-height:40px;padding:5px 8px}
+  #matchMode .pga-btn{padding:7px 6px;font-size:9px}
+  #matchMode .fut-pcard{width:64px}
+  #matchMode .fc-pk .fc-ovr{font-size:17px}
+  #matchMode .fc-pk .fc-pos{font-size:8px}
+  #matchMode .fc-pk .fc-banner{font-size:8px}
+  #matchMode .fut-stands{height:48px}
+  #matchMode .fut-persp{top:34px;padding:0 2px 2px}
+  #matchMode .match-chrome{padding:4px 8px 2px;gap:5px}
+  #matchMode .match-subres{padding:4px 0 6px}
 }
 @media (prefers-reduced-motion:reduce){
   .fut-pcard,.fut-world{transition:none}
@@ -1727,26 +1794,26 @@ html.rr-loader-skip #rrLoader{display:none!important}
       </div>
 
       <!-- Match Mode -->
-      <div id="matchMode" style="display:none">
-        <div class="match-layout">
-          <div class="match-main">
-            <div class="pitch-game-hud">
-              <div class="pgh-left">
-                <div id="liveIndicator" style="display:none;flex-direction:row;align-items:center;gap:5px">
-                  <div class="pgh-live-dot"></div>
-                  <div class="pgh-live-lbl">LIVE</div>
-                </div>
-                <div class="pgh-clock" id="matchClock">00:00</div>
+      <div id="matchMode" class="fut-match" style="display:none">
+        <div class="match-chrome">
+          <div class="pitch-game-hud">
+            <div class="pgh-left">
+              <div id="liveIndicator" style="display:none;flex-direction:row;align-items:center;gap:5px">
+                <div class="pgh-live-dot"></div>
+                <div class="pgh-live-lbl">LIVE</div>
               </div>
-              <div>
-                <div class="pgh-score" id="matchScore">0 – 0</div>
-                <div class="pgh-score-lbl" id="matchScoreLbl">GSA vs OPP</div>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end">
-                <button class="pgh-start-btn" id="matchStartBtn">▶ Start</button>
-                <button class="pgh-end-btn" id="endMatchBtn">■ End</button>
-              </div>
+              <div class="pgh-clock" id="matchClock">00:00</div>
             </div>
+            <div>
+              <div class="pgh-score" id="matchScore">0 – 0</div>
+              <div class="pgh-score-lbl" id="matchScoreLbl">GSA vs OPP</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end">
+              <button class="pgh-start-btn" id="matchStartBtn">▶ Start</button>
+              <button class="pgh-end-btn" id="endMatchBtn">■ End</button>
+            </div>
+          </div>
+          <div class="match-chrome-row">
             <div class="pitch-game-actions">
               <button class="pga-btn pga-goal" id="goalBtn">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m12 8 4 4-4 4-4-4 4-4z"/></svg>
@@ -1757,40 +1824,60 @@ html.rr-loader-skip #rrLoader{display:none!important}
                 ⇄ SUB
               </button>
             </div>
-            <div class="pitch-match-log" id="matchLog">
-              <div class="pml-empty">Match just started — events will appear here</div>
-            </div>
-            <!-- Formation shape switcher for match mode -->
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;margin-bottom:6px">
-              <span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--dim)">Formation Shape</span>
+            <div class="match-shape">
+              <span class="match-shape-lbl">Shape</span>
               <div class="pmp-wrap" style="padding:2px;gap:2px">
                 <button class="pmp-btn" id="mSlotDef" data-mslot="defensive" onclick="switchMatchFormSlot('defensive')">DEF</button>
                 <button class="pmp-btn pmp-active" id="mSlotBal" data-mslot="balanced" onclick="switchMatchFormSlot('balanced')">BAL</button>
                 <button class="pmp-btn" id="mSlotAtk" data-mslot="attacking" onclick="switchMatchFormSlot('attacking')">ATK</button>
               </div>
             </div>
-            <!-- Pitch board in match mode (same SVG, non-draggable) -->
-            <div class="pitch-board">
-              <svg viewBox="0 0 68 100" preserveAspectRatio="none">
-                <defs>
-                  <radialGradient id="pGW2" cx="34" cy="50" r="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#fff" stop-opacity=".08"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
-                  <radialGradient id="pVW2" cx="34" cy="50" r="56" gradientUnits="userSpaceOnUse"><stop offset="28%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity=".6"/></radialGradient>
-                </defs>
-                <rect width="68" height="100" fill="#0b5126"/>
-                <rect x="0" y="0" width="68" height="5" fill="#178649"/><rect x="0" y="10" width="68" height="5" fill="#178649"/><rect x="0" y="20" width="68" height="5" fill="#178649"/><rect x="0" y="30" width="68" height="5" fill="#178649"/><rect x="0" y="40" width="68" height="5" fill="#178649"/><rect x="0" y="50" width="68" height="5" fill="#178649"/><rect x="0" y="60" width="68" height="5" fill="#178649"/><rect x="0" y="70" width="68" height="5" fill="#178649"/><rect x="0" y="80" width="68" height="5" fill="#178649"/><rect x="0" y="90" width="68" height="5" fill="#178649"/>
-                <rect width="68" height="100" fill="url(#pGW2)"/>
-                <g stroke="rgba(255,255,255,0.9)" stroke-width="0.55" fill="none"><rect x="1" y="1" width="66" height="98"/><line x1="1" y1="50" x2="67" y2="50"/><circle cx="34" cy="50" r="9.15"/><rect x="16" y="1" width="36" height="16"/><rect x="24" y="1" width="20" height="6"/><path d="M26.34 17A9.15 9.15 0 0 1 41.66 17"/><rect x="16" y="83" width="36" height="16"/><rect x="24" y="93" width="20" height="6"/><path d="M26.34 83A9.15 9.15 0 0 0 41.66 83"/></g>
-                <circle cx="34" cy="50" r=".72" fill="rgba(255,255,255,0.9)"/><circle cx="34" cy="12" r=".72" fill="rgba(255,255,255,0.9)"/><circle cx="34" cy="88" r=".72" fill="rgba(255,255,255,0.9)"/>
-                <rect width="68" height="100" fill="url(#pVW2)"/>
-              </svg>
+          </div>
+          <div class="pitch-match-log" id="matchLog">
+            <div class="pml-empty">Match just started — events will appear here</div>
+          </div>
+        </div>
+        <div class="fut-arena" id="matchArena">
+          <div class="fut-stands" id="matchStands"></div>
+          <div class="fut-flare"></div>
+          <div class="fut-persp">
+            <div class="fut-world">
+              <div class="fut-surface">
+                <svg class="fut-lines" viewBox="0 0 68 100" preserveAspectRatio="none">
+                  <defs>
+                    <radialGradient id="mFutGw" cx="34" cy="50" r="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#fff" stop-opacity=".10"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                    <linearGradient id="mFutSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff6c8" stop-opacity=".2"/><stop offset="45%" stop-color="#fff" stop-opacity="0"/></linearGradient>
+                  </defs>
+                  <rect width="68" height="100" fill="url(#mFutGw)"/>
+                  <rect width="68" height="100" fill="url(#mFutSun)"/>
+                  <g stroke="rgba(255,255,255,0.95)" stroke-width="0.5" fill="none">
+                    <rect x="1.2" y="1.2" width="65.6" height="97.6"/>
+                    <line x1="1.2" y1="50" x2="66.8" y2="50"/>
+                    <circle cx="34" cy="50" r="9.15"/>
+                    <rect x="16" y="1.2" width="36" height="16.5"/>
+                    <rect x="24" y="1.2" width="20" height="6.2"/>
+                    <path d="M26.34 17.7A9.15 9.15 0 0 1 41.66 17.7"/>
+                    <rect x="16" y="82.3" width="36" height="16.5"/>
+                    <rect x="24" y="92.6" width="20" height="6.2"/>
+                    <path d="M26.34 82.3A9.15 9.15 0 0 0 41.66 82.3"/>
+                  </g>
+                  <circle cx="34" cy="50" r=".7" fill="rgba(255,255,255,0.95)"/>
+                  <circle cx="34" cy="12.2" r=".55" fill="rgba(255,255,255,0.95)"/>
+                  <circle cx="34" cy="87.8" r=".55" fill="rgba(255,255,255,0.95)"/>
+                </svg>
+                <svg class="chem-svg" id="matchChemSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+                <div id="matchLabels"></div>
+                <div id="matchSlots"></div>
+                <i class="fut-corner" data-c="tl"></i><i class="fut-corner" data-c="tr"></i><i class="fut-corner" data-c="br"></i><i class="fut-corner" data-c="bl"></i>
+              </div>
               <div class="pitch-overlay" id="matchPitchOverlay"></div>
             </div>
           </div>
-          <div class="match-side">
-            <div>
-              <div class="match-bench-head">Bench — tap to sub in</div>
-              <div class="bench-chips-list" id="matchBench"></div>
-            </div>
+        </div>
+        <div class="fut-subres match-subres">
+          <div class="fut-subres-side"><span>BENCH</span></div>
+          <div class="fut-subres-track">
+            <div class="bench-chips-list" id="matchBench"></div>
           </div>
         </div>
       </div>
@@ -1826,24 +1913,24 @@ html.rr-loader-skip #rrLoader{display:none!important}
   </main>
 
   <!-- BOTTOM NAV (mobile) -->
-  <nav class="bottom-nav" id="bottomNav">
+  <nav class="bottom-nav bnav-a" id="bottomNav" data-icons="A">
     <button class="bnav-btn" data-view="calendar">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.05 2.2 10.85a1 1 0 0 0 .62 1.78H4.5V20.2A1.6 1.6 0 0 0 6.1 21.8h3.5v-6.15h4.8V21.8h3.5a1.6 1.6 0 0 0 1.6-1.6v-7.57h1.68a1 1 0 0 0 .62-1.78L12 3.05z"/></svg></span>
       <span class="bnav-lbl">Home</span>
     </button>
     <button class="bnav-btn active" data-view="roster">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.05 3.15 12 5.2l3.95-2.05 2.35 2.15L20.6 7.1l-1.15 2.05V20.1A1.55 1.55 0 0 1 17.9 21.7H6.1A1.55 1.55 0 0 1 4.55 20.1V9.15L3.4 7.1l2.3-1.8 2.35-2.15zM9.15 10.4h5.7v1.55h-5.7V10.4zm0 3.15h5.7v1.55h-5.7V13.55z"/></svg></span>
       <span class="bnav-lbl">Roster</span>
     </button>
     <button class="bnav-btn" data-view="radar">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.1a9.9 9.9 0 1 1 0 19.8 9.9 9.9 0 0 1 0-19.8zm0 2.05a7.85 7.85 0 1 0 0 15.7 7.85 7.85 0 0 0 0-15.7zm0 2.2a5.65 5.65 0 1 1 0 11.3 5.65 5.65 0 0 1 0-11.3zm0 2.15a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/><path d="M12 11.15V4.7A7.3 7.3 0 0 1 18.55 14.4L12 12.25z"/><circle cx="12" cy="12" r="1.4" fill="#060d08"/></svg></span>
       <span class="bnav-lbl">Radar</span>
     </button>
     <button class="bnav-btn" data-view="pitch">
-      <div class="bnav-pitch-wrap">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M12 3v18M2 12h20"/></svg>
+      <span class="bnav-icon bnav-pitch-wrap">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3.3 4.15h17.4A1.7 1.7 0 0 1 22.4 5.85v12.3a1.7 1.7 0 0 1-1.7 1.7H3.3a1.7 1.7 0 0 1-1.7-1.7V5.85A1.7 1.7 0 0 1 3.3 4.15zM4 5.85v12.3h16V5.85H4zm7.35 0h1.3v12.3h-1.3V5.85zM12 9.05a2.95 2.95 0 1 1 0 5.9 2.95 2.95 0 0 1 0-5.9zM5.15 8.35h3.15v2.15H5.15V8.35zm10.55 5.15h3.15v2.15h-3.15v-2.15z"/></svg>
         <span class="bnav-team-dot" id="bnavPitchDot"></span>
-      </div>
+      </span>
       <span class="bnav-lbl">Pitch</span>
     </button>
   </nav>
@@ -4000,14 +4087,44 @@ function endMatch(){
   showPostGame();
 }
 
+function ensureMatchStadium(){
+  const dest=document.getElementById('matchStands');
+  const src=document.querySelector('#futArena .fut-stands');
+  if(!dest||!src||dest.dataset.ready)return;
+  dest.innerHTML=src.innerHTML.replace(/id="fut/g,'id="mFut').replace(/url\(#fut/g,'url(#mFut');
+  dest.dataset.ready='1';
+}
 function renderMatchPitchTokens(){
   const o=document.getElementById('matchPitchOverlay');
   if(!o)return;
-  o.innerHTML=match.starters.map(p=>`<div class="pitch-tok pitch-tok-${p.tier||'gold'}" style="left:${p.cx}%;top:${p.cy}%">
-    <div class="tok-toprow"><span class="tok-ovr">${p.ovr}</span><span class="tok-pos">${p.pos}</span></div>
-    <div class="tok-av">${p.init}</div>
-    <div class="tok-name">${p.name.split(' ').pop()}</div>
-  </div>`).join('');
+  ensureMatchStadium();
+  const fmt=activeTeam?activeTeam.format:'11v11';
+  const slots=fcSlots(fmt,_matchSlot);
+  const links=fcLinks(slots);
+  const occ=slots.map(s=>match.starters.findIndex(p=>Math.abs(s.cx-p.cx)<0.6&&Math.abs(s.cy-p.cy)<0.6));
+  const fitAt=j=>occ[j]>=0?posFit(match.starters[occ[j]],slots[j].pos):-1;
+  const lineCol={g:'#3DDC68',y:'#FF9F2E',r:'#FF5252'};
+  let lines='';
+  links.forEach(([i,j])=>{
+    const fi=fitAt(i),fj=fitAt(j);
+    if(fi<0||fj<0){lines+=`<line x1="${slots[i].cx}" y1="${slots[i].cy}" x2="${slots[j].cx}" y2="${slots[j].cy}" stroke="rgba(255,255,255,.22)" stroke-width="1.1" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>`;return;}
+    const c=Math.min(fi,fj)>=3?'g':Math.min(fi,fj)>=1?'y':'r';
+    lines+=`<line x1="${slots[i].cx}" y1="${slots[i].cy}" x2="${slots[j].cx}" y2="${slots[j].cy}" stroke="${lineCol[c]}" stroke-opacity=".9" stroke-width="2.2" vector-effect="non-scaling-stroke"/>`;
+  });
+  const chemEl=document.getElementById('matchChemSvg');
+  if(chemEl) chemEl.innerHTML=lines;
+  const slotHost=document.getElementById('matchSlots');
+  const labHost=document.getElementById('matchLabels');
+  const slotHtml=slots.map((s,j)=>`<div class="pitch-slot" data-sj="${j}" style="left:${s.cx}%;top:${s.cy}%"></div>`).join('');
+  const labHtml=slots.map(s=>`<div class="fut-pos-lab" style="left:${s.cx}%;top:${s.cy}%">${s.pos}</div>`).join('');
+  const shadeHtml=match.starters.map(p=>`<div class="fut-shade" style="left:${p.cx}%;top:${p.cy}%"></div>`).join('');
+  if(slotHost) slotHost.innerHTML=slotHtml+shadeHtml;
+  if(labHost) labHost.innerHTML=labHtml;
+  o.innerHTML=match.starters.map((p,i)=>{
+    const last=p.name.split(' ').pop();
+    const sub=(match.subOff&&match.subOff.name===p.name)?' sub-out':'';
+    return `<div class="pitch-tok fut-pcard match-pcard${sub}" style="left:${p.cx}%;top:${p.cy}%;z-index:${10+Math.round(+p.cy||0)}" data-pi="${i}">${fifaCardHtml({...p,name:last},{size:'pk',badges:false})}</div>`;
+  }).join('');
 }
 
 function renderMatchBench(){
@@ -4229,7 +4346,7 @@ function showPostGame(){
     closePostgame();
     /* Return to Regular mode */
     document.getElementById('matchMode').style.display='none';
-    document.getElementById('regularMode').style.display='';
+    document.getElementById('regularMode').style.display='flex';
     const pmpR=document.getElementById('pmpRegularBtn');
     const pmpM=document.getElementById('pmpMatchBtn');
     if(pmpR)pmpR.classList.add('pmp-active');
@@ -5397,7 +5514,7 @@ function initAuth(){
   const pmpReg=document.getElementById('pmpRegularBtn');
   const pmpMatch=document.getElementById('pmpMatchBtn');
   if(pmpReg)pmpReg.addEventListener('click',()=>{
-    document.getElementById('regularMode').style.display='';
+    document.getElementById('regularMode').style.display='flex';
     document.getElementById('matchMode').style.display='none';
     pmpReg.classList.add('pmp-active');pmpMatch.classList.remove('pmp-active');
     if(match.running){clearInterval(match.timerInterval);match.timerInterval=null;match.running=false;}
@@ -5405,11 +5522,60 @@ function initAuth(){
   });
   if(pmpMatch)pmpMatch.addEventListener('click',()=>{
     document.getElementById('regularMode').style.display='none';
-    document.getElementById('matchMode').style.display='';
+    document.getElementById('matchMode').style.display='flex';
     pmpMatch.classList.add('pmp-active');pmpReg.classList.remove('pmp-active');
     /* Only reset if no match in progress */
     if(!match.running && match.seconds===0)initMatch();
+    else {ensureMatchStadium();renderMatchPitchTokens();renderMatchBench();}
   });
+
+
+  /* ── Bottom-nav icon styles: ?icons=A|B|C (default A) ── */
+  const NAV_ICON_SVGS={
+    A:{
+      calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.05 2.2 10.85a1 1 0 0 0 .62 1.78H4.5V20.2A1.6 1.6 0 0 0 6.1 21.8h3.5v-6.15h4.8V21.8h3.5a1.6 1.6 0 0 0 1.6-1.6v-7.57h1.68a1 1 0 0 0 .62-1.78L12 3.05z"/></svg>',
+      roster:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.05 3.15 12 5.2l3.95-2.05 2.35 2.15L20.6 7.1l-1.15 2.05V20.1A1.55 1.55 0 0 1 17.9 21.7H6.1A1.55 1.55 0 0 1 4.55 20.1V9.15L3.4 7.1l2.3-1.8 2.35-2.15zM9.15 10.4h5.7v1.55h-5.7V10.4zm0 3.15h5.7v1.55h-5.7V13.55z"/></svg>',
+      radar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.1a9.9 9.9 0 1 1 0 19.8 9.9 9.9 0 0 1 0-19.8zm0 2.05a7.85 7.85 0 1 0 0 15.7 7.85 7.85 0 0 0 0-15.7zm0 2.2a5.65 5.65 0 1 1 0 11.3 5.65 5.65 0 0 1 0-11.3zm0 2.15a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/><path d="M12 11.15V4.7A7.3 7.3 0 0 1 18.55 14.4L12 12.25z"/><circle cx="12" cy="12" r="1.4" fill="#060d08"/></svg>',
+      pitch:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3.3 4.15h17.4A1.7 1.7 0 0 1 22.4 5.85v12.3a1.7 1.7 0 0 1-1.7 1.7H3.3a1.7 1.7 0 0 1-1.7-1.7V5.85A1.7 1.7 0 0 1 3.3 4.15zM4 5.85v12.3h16V5.85H4zm7.35 0h1.3v12.3h-1.3V5.85zM12 9.05a2.95 2.95 0 1 1 0 5.9 2.95 2.95 0 0 1 0-5.9zM5.15 8.35h3.15v2.15H5.15V8.35zm10.55 5.15h3.15v2.15h-3.15v-2.15z"/></svg>'
+    },
+    B:{
+      calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2h18v9.1A2.2 2.2 0 0 1 18.8 22.5H5.2A2.2 2.2 0 0 1 3 20.3v-9.1zm1.7-6.4h3.2V3.1h2.1v1.7h3.9V3.1h2.1v1.7h3.2A2 2 0 0 1 21.2 6.8v2.7H2.8V6.8A2 2 0 0 1 4.7 4.8zM6.4 13.6h4.1v3.6H6.4v-3.6z"/></svg>',
+      roster:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.6 2.6 12 5l4.4-2.4 2.7 2.5 2.6 2.1-1.4 2.5v10.6A1.9 1.9 0 0 1 18.4 22H5.6A1.9 1.9 0 0 1 3.7 20.3V9.7L2.3 7.2l2.6-2.1 2.7-2.5zM8.2 9.6h7.6v2.1H8.2V9.6zm0 3.8h7.6v2.1H8.2v-2.1z"/></svg>',
+      radar:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.2"/><path fill="#060d08" d="M12 12V3.6A8.4 8.4 0 0 1 19.8 15.8L12 12z"/><circle cx="12" cy="12" r="2.15"/></svg>',
+      pitch:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M2.4 4.2h19.2A1.9 1.9 0 0 1 23.5 6.1v11.8a1.9 1.9 0 0 1-1.9 1.9H2.4A1.9 1.9 0 0 1 .5 17.9V6.1A1.9 1.9 0 0 1 2.4 4.2zm8.95 1.8v12h1.3v-12h-1.3zM12 8.6a3.4 3.4 0 1 1 0 6.8 3.4 3.4 0 0 1 0-6.8zM4.2 7.4h3.6v2.5H4.2V7.4zm12 6.7h3.6v2.5h-3.6v-2.5z"/></svg>'
+    },
+    C:{
+      calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5h16v8.2A1.8 1.8 0 0 1 18.2 20.5H5.8A1.8 1.8 0 0 1 4 18.7v-8.2z"/><path class="acc" d="M5.6 5.2h12.8A1.6 1.6 0 0 1 20 6.8V9H4V6.8A1.6 1.6 0 0 1 5.6 5.2z"/><path d="M8 3.5v3M16 3.5v3"/></svg>',
+      roster:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 4.2 12 6.1l3.8-1.9 2.1 1.9 2.2 1.6-1 1.8V19.4A1.4 1.4 0 0 1 17.7 20.8H6.3A1.4 1.4 0 0 1 4.9 19.4V9.5L3.9 7.7 6.1 6.1 8.2 4.2z"/><path class="acc" d="M8.6 11h6.8v1.5H8.6zm0 3.1h6.8v1.5H8.6z"/></svg>',
+      radar:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="5.2"/><circle cx="12" cy="12" r="2"/><path class="acc" d="M12 12V4.8A7.2 7.2 0 0 1 18.3 14.1L12 12z"/></svg>',
+      pitch:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="4.6" width="17.6" height="14.8" rx="1.6"/><path d="M12 4.6v14.8M3.2 12h17.6"/><circle cx="12" cy="12" r="2.5"/><path d="M3.2 8.2h3.2v3.2H3.2zm14.4 4.4h3.2v3.2h-3.2z"/><circle class="acc" cx="12" cy="12" r="1.05"/></svg>'
+    }
+  };
+  function applyNavIcons(style){
+    const nav=document.getElementById('bottomNav');
+    if(!nav)return;
+    const s=(style&&/^[ABC]$/i.test(style))?style.toUpperCase():'A';
+    nav.dataset.icons=s;
+    nav.classList.remove('bnav-a','bnav-b','bnav-c');
+    nav.classList.add('bnav-'+s.toLowerCase());
+    const pack=NAV_ICON_SVGS[s];
+    nav.querySelectorAll('.bnav-btn').forEach(btn=>{
+      const key=btn.dataset.view;
+      const svg=pack[key];
+      if(!svg)return;
+      const mount=btn.querySelector('.bnav-icon');
+      if(!mount)return;
+      const dot=mount.querySelector('.bnav-team-dot');
+      mount.querySelectorAll('svg').forEach(el=>el.remove());
+      mount.insertAdjacentHTML('afterbegin',svg);
+      if(dot)mount.appendChild(dot);
+    });
+  }
+  (function(){
+    let q='A';
+    try{const m=location.search.match(/[?&]icons=([ABC])/i);if(m)q=m[1].toUpperCase();}catch(e){}
+    applyNavIcons(q);
+  })();
 
   /* Match buttons */
   const matchStartBtn=document.getElementById('matchStartBtn');
