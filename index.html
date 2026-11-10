@@ -1120,6 +1120,159 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
   font-weight:800;
   letter-spacing:.3px;
 }
+/* ══ FUT stadium pitch (preview) ══ */
+#view-pitch{padding:0;overflow:hidden}
+#view-pitch.active{display:flex;flex-direction:column}
+#view-pitch .pitch-mode-bar{padding:8px 12px 6px;position:relative;z-index:6;flex-shrink:0;background:linear-gradient(180deg,rgba(6,13,8,.78),rgba(6,13,8,.2) 80%,transparent)}
+#matchMode{padding:14px 16px 20px;overflow:auto;flex:1;min-height:0}
+.fut-regular{flex:1;min-height:0;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.fut-hud{flex-shrink:0;position:relative;z-index:7;padding:0 10px 6px}
+.fut-hud-bar{display:flex;align-items:center;gap:8px;background:rgba(6,10,8,.78);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:6px 8px;backdrop-filter:blur(8px)}
+.fut-hud-toggle{margin-left:auto;border:0;background:rgba(255,255,255,.06);color:var(--text);font-family:var(--font-display);font-size:13px;letter-spacing:1px;padding:5px 9px;border-radius:8px;cursor:pointer;flex-shrink:0}
+.fut-hud-toggle span{font-family:var(--font-body);font-size:9px;font-weight:800;letter-spacing:.6px;color:var(--muted);margin-left:4px}
+.fut-hud-chip{display:flex;flex-direction:column;align-items:center;line-height:1;padding:0 6px;border-right:1px solid rgba(255,255,255,.08)}
+.fut-hud-chip:last-of-type{border-right:0}
+.fut-hud-chip b{font-family:var(--font-display);font-size:16px;font-weight:400;color:#DFF0E3}
+.fut-hud-chip i{font-style:normal;font-size:8px;font-weight:800;letter-spacing:.8px;color:var(--muted);margin-top:2px;text-transform:uppercase}
+.fut-form-cycle{display:flex;align-items:center;gap:4px;flex:1;min-width:0}
+.fut-form-cycle button{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-size:16px;line-height:1;cursor:pointer;flex-shrink:0}
+.fut-form-cycle button:active{background:rgba(0,229,100,.2)}
+.fut-form-cycle .fut-form-nm{font-family:var(--font-display);font-size:18px;letter-spacing:1px;color:#fff;min-width:4.5ch;text-align:center}
+.fut-panels{display:none;gap:8px;margin-top:8px}
+.fut-regular.hud-open .fut-panels{display:flex}
+.fut-regular.hud-open .fut-hud-toggle{background:rgba(0,229,100,.16);color:var(--green)}
+.fut-panel{flex:1;min-width:0;background:rgba(8,10,10,.86);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 10px 10px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.fut-panel-h{font-family:var(--font-display);font-size:12px;letter-spacing:1.6px;color:rgba(255,255,255,.7);margin-bottom:6px;text-transform:uppercase}
+.fut-mini-form{width:100%;max-width:86px;margin:0 auto;display:block}
+.fut-mini-form .mdot{fill:#dce8d8;stroke:#0a0c08;stroke-width:.6}
+.fut-sum-row{display:flex;align-items:center;gap:8px}
+.fut-save{margin-top:6px;width:100%;padding:5px 8px;border-radius:7px;border:1px solid rgba(0,229,100,.35);background:rgba(0,229,100,.1);color:var(--green);font-size:9px;font-weight:800;letter-spacing:.8px;cursor:pointer;text-transform:uppercase}
+.fut-stars{display:flex;gap:1px;justify-content:flex-start;margin:3px 0 6px}
+.fut-stars i{width:11px;height:11px;display:inline-block;background:var(--star);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);--star:#3a3a3a}
+.fut-stars i.on{--star:#F2CB55}
+.fut-stars i.half{--star:linear-gradient(90deg,#F2CB55 50%,#3a3a3a 50%)}
+.fut-stars i.half{background:linear-gradient(90deg,#F2CB55 50%,#3a3a3a 50%)}
+.fut-rate-row{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+.fut-rate-row b{font-family:var(--font-display);font-size:26px;line-height:1;color:#F2CB55;font-weight:400}
+.fut-rate-row span{font-size:8px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.fut-chem-lbl{display:flex;justify-content:space-between;font-size:8px;font-weight:800;letter-spacing:.6px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.fut-chem-lbl b{font-family:var(--font-display);font-size:12px;color:#00E564;font-weight:400}
+.fut-chem-meter{height:6px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:3px}
+.fut-chem-meter>div{height:100%;width:0;background:linear-gradient(90deg,#2a6b2a,#00E564);box-shadow:0 0 8px rgba(0,229,100,.5)}
+.fut-mgr{display:flex;align-items:center;gap:8px;margin-top:8px;background:linear-gradient(155deg,#fff0a6,#d9b14a 45%,#a77a22);border-radius:8px;padding:5px 7px;color:#2a1c00;min-height:40px}
+.fut-mgr-av{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.45);border:1.5px solid rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:11px;color:#7a5300;flex-shrink:0;background-size:cover;background-position:center}
+.fut-mgr-nm{font-family:var(--font-display);font-size:11px;letter-spacing:.4px;text-transform:uppercase;line-height:1.1}
+.fut-mgr-rl{font-size:7.5px;font-weight:800;opacity:.75;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px}
+.fut-mgr-bd{margin-left:auto;font-size:7px;font-weight:900;letter-spacing:.6px;background:rgba(42,28,0,.85);color:#F2CB55;padding:2px 5px;border-radius:999px}
+
+/* Arena / stadium */
+.fut-arena{flex:1;min-height:0;position:relative;overflow:hidden;background:#0b0d0a}
+.fut-stands{position:absolute;inset:0;pointer-events:none;z-index:0}
+.fut-stands svg{width:100%;height:100%;display:block;object-fit:cover}
+.fut-flare{position:absolute;left:10%;right:10%;top:-12%;height:38%;pointer-events:none;z-index:2;
+  background:radial-gradient(ellipse 55% 70% at 50% 0%,rgba(255,236,180,.6) 0%,rgba(255,210,120,.18) 32%,transparent 72%);}
+.fut-persp{position:absolute;inset:0;z-index:3;perspective:780px;perspective-origin:50% 100%;display:flex;align-items:flex-end;justify-content:center;padding:6px 2px 4px;--fut-tilt:55deg}
+.fut-world{position:relative;width:104%;height:165%;transform:rotateX(var(--fut-tilt));transform-style:preserve-3d;transform-origin:50% 100%;will-change:transform}
+.fut-surface{position:absolute;inset:0;border-radius:3px;overflow:hidden;
+  background-color:#3d8a3a;
+  background-image:repeating-linear-gradient(180deg,#3d8a3a 0,#3d8a3a 10%,#347a32 10%,#347a32 20%);
+  box-shadow:0 0 0 9px #1c2218,0 0 0 10px rgba(255,220,140,.28),0 18px 40px rgba(0,0,0,.55);
+}
+.fut-surface svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.fut-corner{position:absolute;width:2px;height:2px;pointer-events:none;opacity:0}
+.fut-corner[data-c="tl"]{left:0;top:0}.fut-corner[data-c="tr"]{left:100%;top:0}
+.fut-corner[data-c="br"]{left:100%;top:100%}.fut-corner[data-c="bl"]{left:0;top:100%}
+.fut-pos-lab{position:absolute;transform:translate(-50%,10px);font-family:var(--font-display);font-size:10px;letter-spacing:1.1px;color:rgba(255,255,255,.88);text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 6px rgba(0,0,0,.6);pointer-events:none;z-index:1;text-transform:uppercase}
+.pitch-slot{position:absolute;transform:translate(-50%,-50%);width:36px;height:48px;border:1.5px dashed rgba(255,255,255,.32);border-radius:4px;pointer-events:none;background:rgba(255,255,255,.03)}
+.pitch-slot.hot{border-color:#00E564;background:rgba(0,229,100,.22);box-shadow:0 0 12px rgba(0,229,100,.35)}
+.chem-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.fut-shade{position:absolute;left:50%;width:28px;height:10px;border-radius:50%;background:rgba(0,0,0,.38);transform:translate(-50%,-30%);pointer-events:none;z-index:1;filter:none}
+
+/* Standing mini cards on the pitch */
+.fut-pcard{position:absolute;width:50px;transform:translate(-50%,-100%) rotateX(calc(-1 * var(--fut-tilt))) translateZ(2px);transform-origin:50% 100%;pointer-events:all;cursor:grab;touch-action:none;z-index:2;filter:none}
+.fut-pcard .fc{width:100%;aspect-ratio:2/2.42;cursor:grab}
+.fut-pcard .fc:hover{transform:none}
+.fut-pcard .fc::before{filter:none;background:rgba(0,0,0,.4);inset:8% 6% -2%;border-radius:2px}
+.fut-pcard .fc-inform::before{filter:none;animation:none;background:rgba(0,229,100,.7);box-shadow:0 0 12px rgba(0,229,100,.85)}
+.fut-pcard.dragging{z-index:30;cursor:grabbing;transform:translate(-50%,-110%) rotateX(calc(-1 * var(--fut-tilt))) translateZ(18px) scale(1.08)}
+.fut-pcard.sub-out{outline:none}
+.fut-pcard.sub-out .fc{box-shadow:0 0 0 2px #FFD700,0 0 16px rgba(255,215,0,.7)}
+.fc-pk .fc-stats,.fc-pk .fc-badges,.fc-pk .fc-num,.fc-pk .fc-tag{display:none}
+.fc-pk .fc-in{padding:8% 6% 16%}
+.fc-pk .fc-top{left:8%;top:7%}
+.fc-pk .fc-ovr{font-size:15px;letter-spacing:0}
+.fc-pk .fc-pos{font-size:7px;margin-top:1px;font-weight:900}
+.fc-pk .fc-portrait{width:58%;margin-left:26%;margin-top:8%}
+.fc-pk .fc-init{font-size:10px;border-width:1px;margin-bottom:4%}
+.fc-pk .fc-sil{inset:8% 8% 0}
+.fc-pk .fc-banner{font-size:7px;padding:1px 2px;margin-top:0;letter-spacing:.4px;position:absolute;bottom:16%;left:-5%;width:110%}
+.pitch-overlay{position:absolute;inset:0;pointer-events:none;transform-style:preserve-3d}
+
+/* Bottom SUB / RES strip */
+.fut-subres{flex-shrink:0;position:relative;z-index:6;display:flex;align-items:stretch;background:linear-gradient(180deg,rgba(8,10,10,.2),rgba(8,10,10,.92) 30%);padding:6px 0 8px;border-top:1px solid rgba(255,255,255,.08)}
+.fut-subres-side{width:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fut-subres-side span{font-family:var(--font-display);font-size:12px;letter-spacing:1.5px;color:rgba(255,255,255,.7);writing-mode:vertical-rl;transform:rotate(180deg)}
+.fut-subres-track{flex:1;min-width:0;overflow:hidden;display:flex;flex-direction:column}
+.fut-subres .sb-head{padding:0 6px 4px}
+.fut-subres .sb-title{font-size:12px;letter-spacing:1px}
+.fut-subres .sb-hint{display:none}
+.fut-subres .bench-sub-banner{margin:0 6px 4px;padding:5px 8px}
+.sb-lanes{display:flex;gap:0;overflow-x:auto;padding:2px 4px 4px;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.sb-lanes::-webkit-scrollbar{display:none}
+.sb-lane{display:flex;gap:6px;align-items:stretch}
+.sb-lane-res{padding-left:8px;margin-left:6px;border-left:1px dashed rgba(255,255,255,.18)}
+.fut-empty{flex:0 0 52px;scroll-snap-align:start;height:76px;border-radius:4px;background:linear-gradient(180deg,#2a2e2c,#1a1e1c);border:1px solid rgba(255,255,255,.08);display:flex;align-items:flex-end;justify-content:center;color:rgba(255,255,255,.22);font-family:var(--font-display);font-size:9px;letter-spacing:1px;padding-bottom:6px}
+.fut-subres .sb-card{flex:0 0 64px;scroll-snap-align:start;gap:3px}
+.fut-subres .fc-bn{width:62px}
+.fut-subres .sb-chips,.fut-subres .sb-fit{display:none}
+.fut-subres .sb-in{width:100%;padding:3px 4px;font-size:8px;letter-spacing:.5px;border-radius:5px;border:1px solid rgba(255,215,0,.35);background:rgba(255,215,0,.1);color:var(--gold);font-weight:900;cursor:pointer}
+.fut-subres .sb-in.gold{background:rgba(255,215,0,.2)}
+.fut-subres .sb-card{content-visibility:auto;contain-intrinsic-size:auto 110px}
+
+/* Desktop / wide: FIFA-style floating side panels */
+@media (min-width:960px){
+  .fut-hud-bar{display:none}
+  .fut-panels{display:flex!important;position:absolute;inset:12px 12px auto;z-index:8;margin:0;pointer-events:none;justify-content:space-between}
+  .fut-panel{pointer-events:all;width:200px;flex:0 0 200px;background:rgba(8,10,10,.88)}
+  .fut-persp{padding:8px 210px 8px;--fut-tilt:56deg;perspective:900px}
+  .fut-world{width:108%;height:170%}
+  .fut-pcard{width:56px}
+  .fc-pk .fc-ovr{font-size:17px}
+  .fc-pk .fc-pos{font-size:8px}
+  .fc-pk .fc-banner{font-size:8px}
+  .fut-subres{padding:8px 80px 12px}
+}
+@media (min-width:1280px){
+  .fut-pcard{width:60px}
+  .fut-persp{--fut-tilt:57deg;perspective:1000px}
+}
+/* Landscape phones / short screens */
+@media (orientation:landscape) and (max-height:500px){
+  .shell.on-pitch{grid-template-columns:1fr!important;grid-template-rows:var(--topbar) 1fr!important}
+  .shell.on-pitch .sidebar,.shell.on-pitch .bottom-nav{display:none!important}
+  .shell.on-pitch .tb-menu-btn{display:flex!important}
+  #view-pitch .pitch-mode-bar{padding:2px 8px}
+  .pitch-team-nm{font-size:13px}
+  .fut-hud{padding:0 8px 2px}
+  .fut-hud-bar{padding:2px 6px}
+  .fut-hud-chip b{font-size:13px}
+  .fut-regular.hud-open .fut-panels{max-height:36vh;overflow:auto}
+  .fut-persp{padding:2px 4px 2px;--fut-tilt:48deg;perspective:640px}
+  .fut-world{width:100%;height:175%}
+  .fut-pcard{width:34px}
+  .fc-pk .fc-ovr{font-size:10px}
+  .fc-pk .fc-banner{font-size:5.5px}
+  .fc-pk .fc-pos{font-size:5.5px}
+  .fut-pos-lab{font-size:6px}
+  .fut-subres{padding:2px 0 2px}
+  .fut-empty{height:48px;flex-basis:36px}
+  .fut-subres .sb-card{flex-basis:42px}
+  .fut-subres .fc-bn{width:40px}
+  .fut-subres .sb-in{padding:1px 2px;font-size:6.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  .fut-pcard,.fut-world{transition:none}
+}
 </style>
 
 <!-- AUTH SCREEN -->
@@ -1397,43 +1550,85 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
       </div>
 
       <!-- Regular Mode -->
-      <div id="regularMode">
-        <div class="pitch-regular-content">
-          <div class="pitch-field-wrap">
-            <div class="pitch-field-head">
-              <div class="pf-title">Starting XI</div>
-              <div class="pf-slots">
+      <div id="regularMode" class="fut-regular">
+        <div class="fut-hud">
+          <div class="fut-hud-bar">
+            <div class="fut-form-cycle">
+              <button type="button" onclick="futCycleForm(-1)" aria-label="Previous formation">‹</button>
+              <div class="fut-form-nm" id="futFormName">4-3-3</div>
+              <button type="button" onclick="futCycleForm(1)" aria-label="Next formation">›</button>
+            </div>
+            <div class="fut-hud-chip"><b id="futChipOvr">–</b><i>Rating</i></div>
+            <div class="fut-hud-chip"><b id="futChipChem">–</b><i>Chem</i></div>
+            <div class="fut-hud-chip"><b id="futChipForm">4-3-3</b><i>Form</i></div>
+            <button type="button" class="fut-hud-toggle" id="futHudToggle" onclick="toggleFutHud()">SUMMARY<span>▾</span></button>
+          </div>
+          <div class="fut-panels" id="futPanels">
+            <div class="fut-panel fut-summary">
+              <div class="fut-panel-h">Summary</div>
+              <div class="fut-sum-row">
+                <button type="button" onclick="futCycleForm(-1)" aria-label="Previous formation" style="width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;flex-shrink:0">‹</button>
+                <div id="futMiniForm" style="flex:1"></div>
+                <button type="button" onclick="futCycleForm(1)" aria-label="Next formation" style="width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;flex-shrink:0">›</button>
+              </div>
+              <button class="fut-save" id="saveFormBtn">Save formation</button>
+              <div class="pf-slots" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">
                 <button class="pf-slot-btn on" data-slot="defensive">DEF</button>
                 <button class="pf-slot-btn" data-slot="balanced">BAL</button>
                 <button class="pf-slot-btn" data-slot="attacking">ATK</button>
               </div>
-              <button class="save-form-btn" id="saveFormBtn">Save</button>
             </div>
-            <div class="team-ovr-bar" id="teamOvrBar" style="margin-top:10px"></div>
-            <div class="pitch-field-body">
-              <div class="pitch-board">
-                <svg viewBox="0 0 68 100" preserveAspectRatio="none">
+            <div class="fut-panel fut-squad">
+              <div class="fut-panel-h">Squad</div>
+              <div class="fut-rate-row"><span>Rating</span><b id="futRating">–</b></div>
+              <div class="fut-stars" id="futStars"></div>
+              <div class="fut-chem-lbl"><span>Chemistry</span><b id="futChemNum">–</b></div>
+              <div class="fut-chem-meter"><div id="futChemBar"></div></div>
+              <div class="fut-mgr" id="futMgrCard"></div>
+            </div>
+          </div>
+        </div>
+        <div class="fut-arena" id="futArena">
+          <div class="fut-stands"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="futStSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1c1810"/><stop offset="35%" stop-color="#12110e"/><stop offset="100%" stop-color="#0a0c08"/></linearGradient><linearGradient id="futStBowl" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2620"/><stop offset="100%" stop-color="#12110e"/></linearGradient><radialGradient id="futStGlow" cx="50%" cy="0%" r="60%"><stop offset="0%" stop-color="#ffe7a8" stop-opacity=".28"/><stop offset="40%" stop-color="#c9a056" stop-opacity=".07"/><stop offset="100%" stop-color="#000" stop-opacity="0"/></radialGradient><pattern id="futCrowdPat" width="80" height="40" patternUnits="userSpaceOnUse"><circle cx="25.9" cy="6.0" r="1.7" fill="#1a1614"/><circle cx="65.7" cy="3.8" r="1.6" fill="#0e0c0a"/><circle cx="17.2" cy="3.4" r="1.4" fill="#221e1a"/><circle cx="7.3" cy="17.0" r="1.9" fill="#1a1614"/><circle cx="75.8" cy="25.2" r="1.6" fill="#1a1614"/><circle cx="46.2" cy="15.9" r="2.1" fill="#1a1614"/><circle cx="44.5" cy="5.3" r="1.4" fill="#0e0c0a"/><circle cx="9.4" cy="12.3" r="1.9" fill="#221e1a"/><circle cx="8.2" cy="22.8" r="1.1" fill="#1a1614"/><circle cx="43.8" cy="2.5" r="1.0" fill="#221e1a"/><circle cx="39.7" cy="21.3" r="1.8" fill="#2a2420"/><circle cx="46.8" cy="18.1" r="1.3" fill="#25211c"/><circle cx="14.4" cy="31.2" r="1.0" fill="#141210"/><circle cx="42.0" cy="35.0" r="1.8" fill="#141210"/><circle cx="48.7" cy="2.9" r="1.5" fill="#221e1a"/><circle cx="60.6" cy="6.1" r="1.5" fill="#1a1614"/><circle cx="77.0" cy="3.1" r="1.6" fill="#25211c"/><circle cx="70.0" cy="12.5" r="1.7" fill="#0e0c0a"/><circle cx="39.7" cy="31.9" r="1.0" fill="#1a1614"/><circle cx="75.6" cy="19.0" r="1.7" fill="#1a1614"/><circle cx="58.5" cy="12.4" r="1.6" fill="#1c1916"/><circle cx="65.8" cy="11.4" r="1.4" fill="#1c1916"/><circle cx="27.8" cy="37.6" r="1.3" fill="#0e0c0a"/><circle cx="9.4" cy="2.4" r="1.8" fill="#221e1a"/><circle cx="59.1" cy="15.9" r="2.0" fill="#2a2420"/><circle cx="6.4" cy="18.0" r="1.6" fill="#221e1a"/><circle cx="65.5" cy="34.6" r="1.2" fill="#2a2420"/><circle cx="78.9" cy="27.3" r="1.4" fill="#221e1a"/><circle cx="12.1" cy="7.0" r="1.2" fill="#221e1a"/><circle cx="1.0" cy="33.2" r="1.1" fill="#141210"/><circle cx="0.3" cy="16.8" r="1.3" fill="#0e0c0a"/><circle cx="25.5" cy="5.0" r="1.9" fill="#0e0c0a"/><circle cx="52.4" cy="29.6" r="1.4" fill="#25211c"/><circle cx="62.4" cy="35.0" r="1.9" fill="#2a2420"/><circle cx="31.8" cy="15.8" r="1.5" fill="#2a2420"/><circle cx="5.0" cy="2.7" r="1.2" fill="#221e1a"/><circle cx="8.8" cy="24.0" r="1.0" fill="#0e0c0a"/><circle cx="12.1" cy="4.1" r="1.3" fill="#1a1614"/><circle cx="5.6" cy="8.3" r="1.4" fill="#1c1916"/><circle cx="20.2" cy="13.9" r="1.3" fill="#1a1614"/><circle cx="9.2" cy="19.5" r="2.1" fill="#2a2420"/><circle cx="38.7" cy="3.4" r="1.0" fill="#141210"/><circle cx="59.2" cy="19.1" r="1.7" fill="#0e0c0a"/><circle cx="1.8" cy="38.0" r="1.5" fill="#221e1a"/><circle cx="55.2" cy="36.6" r="1.8" fill="#141210"/><circle cx="78.3" cy="34.5" r="1.7" fill="#141210"/><circle cx="41.5" cy="36.3" r="1.3" fill="#221e1a"/><circle cx="42.6" cy="31.2" r="1.3" fill="#221e1a"/><circle cx="49.1" cy="31.5" r="1.8" fill="#221e1a"/><circle cx="64.5" cy="32.7" r="1.8" fill="#221e1a"/><circle cx="16.0" cy="19.7" r="1.8" fill="#1a1614"/><circle cx="63.2" cy="18.9" r="1.1" fill="#0e0c0a"/><circle cx="76.5" cy="17.9" r="2.0" fill="#141210"/><circle cx="76.4" cy="14.6" r="1.2" fill="#221e1a"/><circle cx="37.6" cy="13.5" r="1.5" fill="#0e0c0a"/><circle cx="67.2" cy="19.2" r="1.7" fill="#25211c"/><circle cx="51.5" cy="33.4" r="1.0" fill="#2a2420"/><circle cx="62.6" cy="30.0" r="1.5" fill="#221e1a"/><circle cx="34.7" cy="25.4" r="1.0" fill="#1c1916"/><circle cx="31.7" cy="16.1" r="2.0" fill="#1c1916"/><circle cx="12.7" cy="39.7" r="0.9" fill="#0e0c0a"/><circle cx="72.4" cy="32.3" r="1.1" fill="#25211c"/><circle cx="47.7" cy="19.0" r="2.0" fill="#221e1a"/><circle cx="43.9" cy="5.2" r="0.9" fill="#1c1916"/><circle cx="52.0" cy="21.1" r="2.0" fill="#2a2420"/><circle cx="78.9" cy="7.8" r="1.9" fill="#1a1614"/><circle cx="20.1" cy="11.7" r="1.2" fill="#0e0c0a"/><circle cx="26.1" cy="21.8" r="1.9" fill="#1a1614"/><circle cx="72.8" cy="14.2" r="1.4" fill="#0e0c0a"/><circle cx="65.2" cy="20.7" r="1.9" fill="#0e0c0a"/><circle cx="10.5" cy="6.1" r="1.5" fill="#25211c"/><circle cx="35.2" cy="7.3" r="0.9" fill="#25211c"/><circle cx="12.0" cy="5.7" r="1.6" fill="#1a1614"/><circle cx="44.5" cy="13.0" r="1.5" fill="#0e0c0a"/><circle cx="38.6" cy="31.1" r="2.0" fill="#1a1614"/><circle cx="19.9" cy="11.1" r="1.8" fill="#0e0c0a"/><circle cx="36.2" cy="1.1" r="2.0" fill="#1a1614"/><circle cx="35.5" cy="24.5" r="1.5" fill="#0e0c0a"/><circle cx="16.0" cy="11.1" r="1.5" fill="#25211c"/><circle cx="38.2" cy="37.7" r="1.7" fill="#141210"/></pattern></defs><rect width="1000" height="400" fill="url(#futStSky)"/><ellipse cx="500" cy="20" rx="620" ry="90" fill="#1a1814"/><path d="M-40,40 Q500,-30 1040,40 L1040,90 Q500,10 -40,90 Z" fill="#24201c"/><ellipse cx="500" cy="70" rx="640" ry="70" fill="none" stroke="#2c2824" stroke-width="14"/><ellipse cx="500" cy="95" rx="600" ry="62" fill="none" stroke="#1e1c18" stroke-width="12"/><ellipse cx="500" cy="118" rx="560" ry="54" fill="none" stroke="#2a2622" stroke-width="12"/><ellipse cx="500" cy="140" rx="520" ry="48" fill="none" stroke="#181614" stroke-width="11"/><ellipse cx="500" cy="160" rx="480" ry="42" fill="none" stroke="#26221e" stroke-width="10"/><ellipse cx="500" cy="178" rx="440" ry="36" fill="none" stroke="#141210" stroke-width="9"/><path d="M-20,40 L100,230 L0,400 L-20,400 Z" fill="url(#futCrowdPat)" opacity=".85"/><path d="M1020,40 L900,230 L1000,400 L1020,400 Z" fill="url(#futCrowdPat)" opacity=".85"/><ellipse cx="500" cy="90" rx="620" ry="110" fill="url(#futCrowdPat)" opacity=".75"/><path d="M200,30 L155,200" stroke="#0a0a08" stroke-width="6" opacity=".45"/><path d="M350,30 L328,200" stroke="#0a0a08" stroke-width="6" opacity=".45"/><path d="M500,30 L500,200" stroke="#0a0a08" stroke-width="6" opacity=".45"/><path d="M650,30 L672,200" stroke="#0a0a08" stroke-width="6" opacity=".45"/><path d="M800,30 L845,200" stroke="#0a0a08" stroke-width="6" opacity=".45"/><circle cx="80" cy="25.2" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="80" cy="25.2" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="135" cy="24.8" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="135" cy="24.8" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="190" cy="24.4" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="190" cy="24.4" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="245" cy="24.0" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="245" cy="24.0" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="300" cy="23.6" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="300" cy="23.6" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="355" cy="23.2" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="355" cy="23.2" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="410" cy="22.8" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="410" cy="22.8" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="465" cy="22.4" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="465" cy="22.4" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="520" cy="22.0" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="520" cy="22.0" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="575" cy="22.4" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="575" cy="22.4" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="630" cy="22.8" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="630" cy="22.8" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="685" cy="23.2" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="685" cy="23.2" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="740" cy="23.6" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="740" cy="23.6" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="795" cy="24.0" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="795" cy="24.0" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="850" cy="24.4" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="850" cy="24.4" r="7" fill="#ffe7a0" opacity=".18"/><circle cx="905" cy="24.8" r="3.2" fill="#ffe7a0" opacity=".85"/><circle cx="905" cy="24.8" r="7" fill="#ffe7a0" opacity=".18"/><rect width="1000" height="400" fill="url(#futStGlow)"/></svg></div>
+          <div class="fut-flare"></div>
+          <div class="fut-persp">
+            <div class="fut-world">
+              <div class="fut-surface">
+                <svg class="fut-lines" viewBox="0 0 68 100" preserveAspectRatio="none">
                   <defs>
-                    <radialGradient id="pGW" cx="34" cy="50" r="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#fff" stop-opacity=".08"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
-                    <radialGradient id="pVW" cx="34" cy="50" r="56" gradientUnits="userSpaceOnUse"><stop offset="28%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity=".6"/></radialGradient>
+                    <radialGradient id="futGw" cx="34" cy="50" r="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#fff" stop-opacity=".10"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                    <linearGradient id="futSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff6c8" stop-opacity=".2"/><stop offset="45%" stop-color="#fff" stop-opacity="0"/></linearGradient>
                   </defs>
-                  <rect width="68" height="100" fill="#0b5126"/>
-                  <rect x="0" y="0" width="68" height="5" fill="#178649"/><rect x="0" y="10" width="68" height="5" fill="#178649"/><rect x="0" y="20" width="68" height="5" fill="#178649"/><rect x="0" y="30" width="68" height="5" fill="#178649"/><rect x="0" y="40" width="68" height="5" fill="#178649"/><rect x="0" y="50" width="68" height="5" fill="#178649"/><rect x="0" y="60" width="68" height="5" fill="#178649"/><rect x="0" y="70" width="68" height="5" fill="#178649"/><rect x="0" y="80" width="68" height="5" fill="#178649"/><rect x="0" y="90" width="68" height="5" fill="#178649"/>
-                  <rect width="68" height="100" fill="url(#pGW)"/>
-                  <g stroke="rgba(255,255,255,0.9)" stroke-width="0.55" fill="none"><rect x="1" y="1" width="66" height="98"/><line x1="1" y1="50" x2="67" y2="50"/><circle cx="34" cy="50" r="9.15"/><rect x="16" y="1" width="36" height="16"/><rect x="24" y="1" width="20" height="6"/><path d="M26.34 17A9.15 9.15 0 0 1 41.66 17"/><rect x="16" y="83" width="36" height="16"/><rect x="24" y="93" width="20" height="6"/><path d="M26.34 83A9.15 9.15 0 0 0 41.66 83"/></g>
-                  <circle cx="34" cy="50" r=".72" fill="rgba(255,255,255,0.9)"/><circle cx="34" cy="12" r=".72" fill="rgba(255,255,255,0.9)"/><circle cx="34" cy="88" r=".72" fill="rgba(255,255,255,0.9)"/>
-                  <rect width="68" height="100" fill="url(#pVW)"/>
+                  <rect width="68" height="100" fill="url(#futGw)"/>
+                  <rect width="68" height="100" fill="url(#futSun)"/>
+                  <g stroke="rgba(255,255,255,0.95)" stroke-width="0.5" fill="none">
+                    <rect x="1.2" y="1.2" width="65.6" height="97.6"/>
+                    <line x1="1.2" y1="50" x2="66.8" y2="50"/>
+                    <circle cx="34" cy="50" r="9.15"/>
+                    <rect x="16" y="1.2" width="36" height="16.5"/>
+                    <rect x="24" y="1.2" width="20" height="6.2"/>
+                    <path d="M26.34 17.7A9.15 9.15 0 0 1 41.66 17.7"/>
+                    <rect x="16" y="82.3" width="36" height="16.5"/>
+                    <rect x="24" y="92.6" width="20" height="6.2"/>
+                    <path d="M26.34 82.3A9.15 9.15 0 0 0 41.66 82.3"/>
+                  </g>
+                  <circle cx="34" cy="50" r=".7" fill="rgba(255,255,255,0.95)"/>
+                  <circle cx="34" cy="12.2" r=".55" fill="rgba(255,255,255,0.95)"/>
+                  <circle cx="34" cy="87.8" r=".55" fill="rgba(255,255,255,0.95)"/>
                 </svg>
-                <div class="pitch-overlay" id="pitchOverlay"></div>
+                <svg class="chem-svg" id="futChemSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+                <div id="futLabels"></div>
+                <div id="futSlots"></div>
+                <i class="fut-corner" data-c="tl"></i><i class="fut-corner" data-c="tr"></i><i class="fut-corner" data-c="br"></i><i class="fut-corner" data-c="bl"></i>
               </div>
-              <div class="chem-key"><span><i style="background:#00E564"></i>Natural position</span><span><i style="background:#FFD23F"></i>Close</span><span><i style="background:#FF5252"></i>Out of position</span></div>
-              <div class="pitch-hint">Drag onto a slot to snap / swap · Tap to view / sub out</div>
+              <div class="pitch-overlay" id="pitchOverlay"></div>
             </div>
           </div>
-          <div class="bench-panel">
-            <div class="bench-head"><div class="bench-head-lbl">Bench</div></div>
-            <div class="bench-body" id="regularBench"></div>
-          </div>
+        </div>
+        <div class="fut-subres">
+          <div class="fut-subres-side"><span>SUB</span></div>
+          <div class="fut-subres-track" id="regularBench"></div>
+          <div class="fut-subres-side"><span>RES</span></div>
         </div>
       </div>
 
@@ -2269,6 +2464,138 @@ function renderTeamOvrBar(){
     <div class="tob-cell"><div class="tob-v">${f.name}</div><div class="tob-l">Formation</div></div>`;
 }
 
+/* ── FUT stadium HUD + 3D pitch helpers ── */
+function _gauss(A,b){
+  const n=A.length,M=A.map((row,i)=>row.concat([b[i]]));
+  for(let i=0;i<n;i++){
+    let p=i;
+    for(let k=i+1;k<n;k++) if(Math.abs(M[k][i])>Math.abs(M[p][i])) p=k;
+    if(Math.abs(M[p][i])<1e-10) return null;
+    if(p!==i){const t=M[i];M[i]=M[p];M[p]=t;}
+    const div=M[i][i];
+    for(let j=i;j<=n;j++) M[i][j]/=div;
+    for(let k=0;k<n;k++) if(k!==i){const f=M[k][i];for(let j=i;j<=n;j++) M[k][j]-=f*M[i][j];}
+  }
+  return M.map(r=>r[n]);
+}
+function _homography(src,dst){
+  const A=[],b=[];
+  for(let i=0;i<4;i++){
+    const {x,y}=src[i],{x:X,y:Y}=dst[i];
+    A.push([x,y,1,0,0,0,-X*x,-X*y]);b.push(X);
+    A.push([0,0,0,x,y,1,-Y*x,-Y*y]);b.push(Y);
+  }
+  const h=_gauss(A,b);if(!h)return null;h.push(1);return h;
+}
+function _applyH(h,x,y){
+  const w=h[6]*x+h[7]*y+h[8];
+  if(Math.abs(w)<1e-10)return {u:.5,v:.5};
+  return {u:(h[0]*x+h[1]*y+h[2])/w,v:(h[3]*x+h[4]*y+h[5])/w};
+}
+function _futCorners(){
+  const w=document.querySelector('#regularMode .fut-world');
+  if(!w)return null;
+  const pts=['tl','tr','br','bl'].map(c=>{
+    const el=w.querySelector('.fut-corner[data-c="'+c+'"]');
+    if(!el)return null;
+    const r=el.getBoundingClientRect();
+    return {x:r.left+r.width/2,y:r.top+r.height/2};
+  });
+  if(pts.some(p=>!p))return null;
+  return pts;
+}
+let _futH=null,_futHAt=0;
+function _futPctFromEvent(clientX,clientY){
+  const now=performance.now();
+  if(!_futH||now-_futHAt>250){
+    const c=_futCorners();
+    if(c){
+      _futH=_homography(c,[{x:0,y:0},{x:1,y:0},{x:1,y:1},{x:0,y:1}]);
+      _futHAt=now;
+    }
+  }
+  if(_futH){
+    const p=_applyH(_futH,clientX,clientY);
+    return {cx:Math.max(3,Math.min(97,p.u*100)),cy:Math.max(2,Math.min(97,p.v*100))};
+  }
+  const o=document.getElementById('pitchOverlay');
+  if(!o)return {cx:50,cy:50};
+  const rect=o.getBoundingClientRect();
+  return {cx:Math.max(3,Math.min(97,(clientX-rect.left)/rect.width*100)),cy:Math.max(2,Math.min(97,(clientY-rect.top)/rect.height*100))};
+}
+function teamStars(ovr){
+  const s=Math.max(0,Math.min(5,Math.round((ovr/20)*2)/2));
+  return s;
+}
+function _starHtml(s){
+  let h='';
+  for(let i=1;i<=5;i++){
+    const cls=s>=i?'on':(s>=i-0.5?'half':'');
+    h+=`<i class="${cls}"></i>`;
+  }
+  return h;
+}
+function renderFutMiniForm(el,slots,occ){
+  if(!el)return;
+  let d='';
+  slots.forEach((s,j)=>{
+    const on=occ[j]>=0;
+    d+=`<circle class="mdot" cx="${s.cx}" cy="${s.cy}" r="${on?3.1:2.4}" opacity="${on?1:.45}"/>`;
+  });
+  el.innerHTML=`<svg class="fut-mini-form" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <defs><pattern id="futMiniGrass" width="100" height="10" patternUnits="userSpaceOnUse"><rect width="100" height="5" fill="#1c5a2a"/><rect y="5" width="100" height="5" fill="#174e24"/></pattern></defs>
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="#14331c" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+    <rect x="2" y="2" width="96" height="96" fill="url(#futMiniGrass)"/>
+    <g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1">
+      <rect x="6" y="6" width="88" height="88"/>
+      <line x1="6" y1="50" x2="94" y2="50"/>
+      <circle cx="50" cy="50" r="10"/>
+      <rect x="30" y="6" width="40" height="16"/>
+      <rect x="38" y="6" width="24" height="7"/>
+      <rect x="30" y="78" width="40" height="16"/>
+      <rect x="38" y="87" width="24" height="7"/>
+    </g>
+    ${d}
+  </svg>`;
+}
+function toggleFutHud(){
+  const r=document.getElementById('regularMode');
+  if(r)r.classList.toggle('hud-open');
+}
+function futCycleForm(dir){
+  const order=['defensive','balanced','attacking'];
+  const i=order.indexOf(activeSlot);
+  switchFormSlot(order[(i+dir+order.length)%order.length]);
+}
+function renderFutHud(){
+  const slots=fcCurrentSlots();
+  const occ=slots.map(s=>PITCH_PLAYERS.findIndex(p=>Math.abs(s.cx-p.cx)<0.6&&Math.abs(s.cy-p.cy)<0.6));
+  const {chem,max,ovr}=teamChem();
+  const f=fcFormation(activeTeam?activeTeam.format:'11v11',activeSlot);
+  const nm=document.getElementById('futFormName');
+  if(nm)nm.textContent=f.name;
+  const chipF=document.getElementById('futChipForm');if(chipF)chipF.textContent=f.name;
+  const chipR=document.getElementById('futChipOvr');if(chipR)chipR.textContent=ovr||'–';
+  const chipC=document.getElementById('futChipChem');if(chipC)chipC.textContent=(chem||0)+'/'+max;
+  const rate=document.getElementById('futRating');if(rate)rate.textContent=ovr||'–';
+  const stars=document.getElementById('futStars');if(stars)stars.innerHTML=_starHtml(teamStars(ovr||0));
+  const cn=document.getElementById('futChemNum');if(cn)cn.textContent=(chem||0)+'/'+max;
+  const bar=document.getElementById('futChemBar');if(bar)bar.style.width=(max?Math.round(chem/max*100):0)+'%';
+  renderFutMiniForm(document.getElementById('futMiniForm'),slots,occ);
+  const mgr=document.getElementById('futMgrCard');
+  if(mgr){
+    const init=COACH.initials||_coachInitials(COACH.name)||'C';
+    const av=COACH.photo?`style="background-image:url(${photoSrc(COACH.photo)});color:transparent"`:'';
+    mgr.innerHTML=`<div class="fut-mgr-av" ${av}>${COACH.photo?'':_esc(init)}</div>
+      <div><div class="fut-mgr-nm">${_esc(COACH.name||'Coach')}</div><div class="fut-mgr-rl">${_esc(COACH.role||'Head Coach')}</div></div>
+      <div class="fut-mgr-bd">MGR</div>`;
+  }
+  const ptn=document.getElementById('pitchTeamNm');
+  if(ptn&&activeTeam)ptn.textContent=activeTeam.name;
+}
+
+window.addEventListener('resize',()=>{_futH=null;_futHAt=0;});
+
 /* ── Walkout / pack reveal ── */
 function playWalkout(p,opts={}){
   const old=document.getElementById('walkout');if(old)old.remove();
@@ -2329,33 +2656,30 @@ function renderRegularBench(){
   if(!b)return;
   const subMode=_regularSubPitchIdx!==null;
   const outP=subMode?PITCH_PLAYERS[_regularSubPitchIdx]:null;
-  const head=document.querySelector('.bench-head');
-  if(head)head.innerHTML=`<div class="sb-head" style="padding:0"><div class="sb-title">SUBSTITUTES<span>${BENCH_PLAYERS.length}</span></div>${_lastSub?'<button class="sb-undo" onclick="fcUndoSub()">↶ Undo sub</button>':''}</div>`;
   let html='';
+  if(_lastSub) html+=`<div class="sb-head" style="padding:0 4px 4px"><button class="sb-undo" onclick="fcUndoSub()">↶ Undo sub</button></div>`;
   if(subMode){
     html+=`<div class="bench-sub-banner"><span>Pick who replaces <strong>${outP?.name||'player'}</strong></span><button onclick="_cancelRegularSub()" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:14px;line-height:1;padding:0;opacity:.75" title="Cancel">✕</button></div>`;
-  } else if(BENCH_PLAYERS.length){
-    html+=`<div class="sb-hint" style="padding-top:8px">⇅ Sub In puts each player in his best-fit spot · or tap a player on the pitch → Sub Out</div>`;
   }
-  if(!BENCH_PLAYERS.length){
-    html+='<div style="text-align:center;padding:28px 12px;font-size:11px;color:var(--dim);font-weight:700">No bench players</div>';
-  } else {
-    const sorted=BENCH_PLAYERS.map((p,i)=>({p,i})).sort((a,b)=>(+b.p.ovr||0)-(+a.p.ovr||0));
-    html+='<div class="sb-strip">'+sorted.map(({p,i})=>{
-      const s=subMode?{slotPos:null,delta:(+p.ovr||0)-(+outP.ovr||0),fit:null,off:outP}:fcBestSubFor(p);
-      let fitTxt='';
-      if(s&&s.off){
-        const d=s.delta,dc=d>0?'up':d<0?'dn':'eq';
-        fitTxt=`${s.slotPos?`→ ${s.slotPos} for ${_esc(s.off.name.split(' ').pop())}`:`for ${_esc(s.off.name.split(' ').pop())}`}<br><b class="${dc}">OVR ${d>0?'+':''}${d}</b>${s.fit===null?'':s.fit>=3?' · natural':s.fit>=1?' · close':' · out of pos'}`;
-      }
-      const alts=[p.pos2,p.pos3].filter(Boolean).join('/');
-      return `<div class="sb-card${subMode?' pick':''}">
+  const cardFn=({p,i})=>{
+    const s=subMode?{slotPos:null,delta:(+p.ovr||0)-(+outP.ovr||0),fit:null,off:outP}:fcBestSubFor(p);
+    return `<div class="sb-card${subMode?' pick':''}">
         <div style="cursor:pointer" onclick="openPlayerModal(BENCH_PLAYERS[${i}])">${fifaCardHtml(p,{size:'bn',badges:false})}</div>
-        <div class="sb-chips"><span class="sb-pos">${_esc(p.pos)}</span>${alts?`<span class="sb-alt">${_esc(alts)}</span>`:''}</div>
-        <div class="sb-fit">${fitTxt}</div>
         <button class="sb-in${subMode?' gold':''}" onclick="fcQuickSub(${i})">⇅ SUB IN</button>
       </div>`;
-    }).join('')+'</div>';
+  };
+  const empty=lbl=>`<div class="fut-empty">${lbl}</div>`;
+  const sorted=BENCH_PLAYERS.map((p,i)=>({p,i})).sort((a,b)=>(+b.p.ovr||0)-(+a.p.ovr||0));
+  const subs=sorted.slice(0,7);
+  const res=sorted.slice(7);
+  const subCells=[];
+  for(let k=0;k<Math.max(7,subs.length);k++) subCells.push(k<subs.length?cardFn(subs[k]):empty('SUB'));
+  const resCells=[];
+  for(let k=0;k<Math.max(3,res.length);k++) resCells.push(k<res.length?cardFn(res[k]):empty('RES'));
+  if(!BENCH_PLAYERS.length){
+    html+='<div class="sb-lanes"><div class="sb-lane">'+Array.from({length:7},()=>empty('SUB')).join('')+'</div><div class="sb-lane sb-lane-res">'+Array.from({length:3},()=>empty('RES')).join('')+'</div></div>';
+  } else {
+    html+='<div class="sb-lanes"><div class="sb-lane">'+subCells.join('')+'</div><div class="sb-lane sb-lane-res">'+resCells.join('')+'</div></div>';
   }
   b.innerHTML=html;
 }
@@ -2575,6 +2899,7 @@ let calYear=_calNow.getFullYear(), calMonth=_calNow.getMonth();
    VIEW SWITCHING
 ══════════════════════════════════════════════ */
 function switchView(v){
+  document.querySelector('.shell')?.classList.toggle('on-pitch',v==='pitch');
   document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id==='view-'+v));
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
   document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
@@ -3287,27 +3612,32 @@ function renderPitchTokens(){
   const links=fcLinks(slots);
   const occ=slots.map(s=>PITCH_PLAYERS.findIndex(p=>Math.abs(s.cx-p.cx)<0.6&&Math.abs(s.cy-p.cy)<0.6));
   const fitAt=j=>occ[j]>=0?posFit(PITCH_PLAYERS[occ[j]],slots[j].pos):-1;
-  const lineCol={g:'#00E564',y:'#FFD23F',r:'#FF5252'};
-  let svg='<svg class="chem-svg" viewBox="0 0 100 100" preserveAspectRatio="none">';
+  const lineCol={g:'#3DDC68',y:'#FF9F2E',r:'#FF5252'};
+  let lines='';
   links.forEach(([i,j])=>{
     const fi=fitAt(i),fj=fitAt(j);
-    if(fi<0||fj<0){svg+=`<line x1="${slots[i].cx}" y1="${slots[i].cy}" x2="${slots[j].cx}" y2="${slots[j].cy}" stroke="rgba(255,255,255,.18)" stroke-width="1.2" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>`;return;}
+    if(fi<0||fj<0){lines+=`<line x1="${slots[i].cx}" y1="${slots[i].cy}" x2="${slots[j].cx}" y2="${slots[j].cy}" stroke="rgba(255,255,255,.22)" stroke-width="1.1" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>`;return;}
     const c=Math.min(fi,fj)>=3?'g':Math.min(fi,fj)>=1?'y':'r';
-    svg+=`<line x1="${slots[i].cx}" y1="${slots[i].cy}" x2="${slots[j].cx}" y2="${slots[j].cy}" stroke="${lineCol[c]}" stroke-opacity=".85" stroke-width="2.4" vector-effect="non-scaling-stroke"/>`;
+    lines+=`<line x1="${slots[i].cx}" y1="${slots[i].cy}" x2="${slots[j].cx}" y2="${slots[j].cy}" stroke="${lineCol[c]}" stroke-opacity=".9" stroke-width="2.2" vector-effect="non-scaling-stroke"/>`;
   });
-  svg+='</svg>';
-  const slotHtml=slots.map((s,j)=>`<div class="pitch-slot" data-sj="${j}" style="left:${s.cx}%;top:${s.cy}%">${occ[j]<0?s.pos:''}</div>`).join('');
-  o.innerHTML=svg+slotHtml+PITCH_PLAYERS.map((p,i)=>{
-    const j=fcSlotIndexOf(p,slots),sp=j>=0?slots[j].pos:p.pos,f=posFit(p,sp),fc=fitCls(f);
-    return `<div class="pitch-tok ptk fc-${cardTier(p)}${isInForm(p)?' fc-inform':''}" style="left:${p.cx}%;top:${p.cy}%" data-pi="${i}">
-    <div class="ptk-fit fit-${fc}">${sp}${f>=3?'':f>=1?' ~':' ✕'}</div>
-    <div class="ptk-in"><div class="ptk-row"><span class="ptk-ovr">${p.ovr}</span><span class="ptk-pos">${p.pos}</span></div>
-    <div class="ptk-av">${p.init}</div>
-    <div class="ptk-nm">${p.name.split(' ').pop()}</div></div>
-  </div>`;}).join('');
+  const chemEl=document.getElementById('futChemSvg');
+  if(chemEl) chemEl.innerHTML=lines;
+  const slotHost=document.getElementById('futSlots');
+  const labHost=document.getElementById('futLabels');
+  const slotHtml=slots.map((s,j)=>`<div class="pitch-slot" data-sj="${j}" style="left:${s.cx}%;top:${s.cy}%"></div>`).join('');
+  const labHtml=slots.map(s=>`<div class="fut-pos-lab" style="left:${s.cx}%;top:${s.cy}%">${s.pos}</div>`).join('');
+  const shadeHtml=PITCH_PLAYERS.map(p=>`<div class="fut-shade" style="left:${p.cx}%;top:${p.cy}%"></div>`).join('');
+  if(slotHost) slotHost.innerHTML=slotHtml+shadeHtml;
+  if(labHost) labHost.innerHTML=labHtml;
+  o.innerHTML=PITCH_PLAYERS.map((p,i)=>{
+    const last=p.name.split(' ').pop();
+    return `<div class="pitch-tok fut-pcard" style="left:${p.cx}%;top:${p.cy}%;z-index:${10+Math.round(+p.cy||0)}" data-pi="${i}">${fifaCardHtml({...p,name:last},{size:'pk',badges:false})}</div>`;
+  }).join('');
   o.querySelectorAll('.pitch-tok').forEach(tok=>makeDraggable(tok,+tok.dataset.pi));
   renderTeamOvrBar();
+  if(typeof renderFutHud==='function')renderFutHud();
   _fcSyncSlotBtns();
+  if(typeof _futH!=='undefined'){_futH=null;_futHAt=0;}
 }
 function _fcSyncSlotBtns(){
   const fmt=activeTeam?activeTeam.format:'11v11';
@@ -3321,36 +3651,50 @@ function _fcNearestSlot(cx,cy){
 
 function makeDraggable(tok,pi){
   if(match.running)return;
-  let sx,sy,scx,scy,moved=false;
+  let sx,sy,scx,scy,moved=false,offx=0,offy=0,holding=false;
+  const hot=(hj)=>{
+    document.querySelectorAll('#regularMode .pitch-slot').forEach(el=>el.classList.toggle('hot',+el.dataset.sj===hj));
+  };
   tok.addEventListener('pointerdown',e=>{
     if(e.button&&e.button!==0)return;
-    e.preventDefault();tok.setPointerCapture(e.pointerId);
+    e.preventDefault();
+    holding=true;
+    try{tok.setPointerCapture(e.pointerId);}catch(err){}
     sx=e.clientX;sy=e.clientY;scx=PITCH_PLAYERS[pi].cx;scy=PITCH_PLAYERS[pi].cy;moved=false;
+    const pct=(typeof _futPctFromEvent==='function')?_futPctFromEvent(e.clientX,e.clientY):{cx:scx,cy:scy};
+    offx=scx-pct.cx;offy=scy-pct.cy;
     tok.classList.add('dragging');
+    if(typeof _futH!=='undefined'){_futH=null;_futHAt=0;}
   });
   tok.addEventListener('pointermove',e=>{
-    if(!tok.hasPointerCapture(e.pointerId))return;
+    if(!holding)return;
     e.preventDefault();
     const dx=e.clientX-sx,dy=e.clientY-sy;
     if(!moved&&(Math.abs(dx)>6||Math.abs(dy)>6))moved=true;
     if(moved){
-      const rect=tok.parentElement.getBoundingClientRect();
-      const ncx=Math.max(3,Math.min(97,scx+dx/rect.width*100));
-      const ncy=Math.max(2,Math.min(97,scy+dy/rect.height*100));
+      let ncx,ncy;
+      if(typeof _futPctFromEvent==='function'){
+        const pct=_futPctFromEvent(e.clientX,e.clientY);
+        ncx=Math.max(3,Math.min(97,pct.cx+offx));
+        ncy=Math.max(2,Math.min(97,pct.cy+offy));
+      }else{
+        const rect=tok.parentElement.getBoundingClientRect();
+        ncx=Math.max(3,Math.min(97,scx+dx/rect.width*100));
+        ncy=Math.max(2,Math.min(97,scy+dy/rect.height*100));
+      }
       tok.style.left=ncx+'%';tok.style.top=ncy+'%';
       tok._ncx=ncx;tok._ncy=ncy;
-      const hj=_fcNearestSlot(ncx,ncy);
-      tok.parentElement.querySelectorAll('.pitch-slot').forEach(el=>el.classList.toggle('hot',+el.dataset.sj===hj));
+      hot(_fcNearestSlot(ncx,ncy));
     }
   });
   tok.addEventListener('pointerup',()=>{
-    tok.classList.remove('dragging');
+    holding=false;tok.classList.remove('dragging');
+    hot(-1);
     if(!moved){
       if(_regularSubPitchIdx!==null){_doRegularSubSwap(pi,true);}
       else{openPlayerModal(PITCH_PLAYERS[pi],null,pi);}
       return;
     }
-    /* Snap into the nearest slot; swap with whoever was there */
     const slots=fcCurrentSlots();
     const tj=_fcNearestSlot(tok._ncx??scx,tok._ncy??scy);
     const t=slots[tj];
@@ -3359,7 +3703,7 @@ function makeDraggable(tok,pi){
     PITCH_PLAYERS[pi].cx=t.cx;PITCH_PLAYERS[pi].cy=t.cy;
     saveToStorage();renderPitchTokens();
   });
-  tok.addEventListener('pointercancel',()=>{tok.classList.remove('dragging');renderPitchTokens();});
+  tok.addEventListener('pointercancel',()=>{holding=false;tok.classList.remove('dragging');hot(-1);renderPitchTokens();});
 }
 
 function switchFormSlot(slot){
