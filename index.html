@@ -5,6 +5,15 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23060d08'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='18' font-family='Arial,sans-serif' font-weight='700' fill='%2300E564'%3ER%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="fonts/antonio-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){try{
+  var m=location.search.match(/[?&]loader(?:=([^&]*))?/i);
+  var force=!!m && !/^(0|false|no|off)$/i.test(m[1]||'1');
+  if(!force && sessionStorage.getItem('cc_loader_seen')==='1'){
+    document.documentElement.classList.add('rr-loader-skip');
+  }
+}catch(e){}})();
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -1120,7 +1129,88 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
   font-weight:800;
   letter-spacing:.3px;
 }
+
+/* ── Loading screen (pitch scan) ── */
+#rrLoader{position:fixed;inset:0;z-index:8500;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--text);overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .32s ease}
+#rrLoader.is-out{opacity:0;pointer-events:none}
+html.rr-loader-skip #rrLoader{display:none!important}
+.ld{display:flex;position:relative;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center}
+.ld-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background:
+  repeating-linear-gradient(90deg,rgba(0,229,100,.035) 0 14px,transparent 14px 28px),
+  radial-gradient(ellipse 70% 55% at 50% 42%,rgba(0,229,100,.08),transparent 60%),
+  var(--bg)}
+.ld-stage,.ld-word,.ld-bar{position:relative;z-index:1}
+.ld-skip{position:absolute;bottom:28px;left:0;right:0;z-index:1;text-align:center;font-family:var(--font-body);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);animation:ldIn .4s .8s both}
+.ld-word{font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:3px;line-height:.9;text-transform:uppercase;text-align:center;color:var(--text);animation:ldIn .5s .55s both}
+.ld-word em{display:block;color:var(--gold);font-style:normal}
+.ld-bar{width:148px;height:5px;border-radius:99px;background:rgba(255,215,0,.38);box-shadow:0 0 12px rgba(255,215,0,.25);overflow:hidden;margin-top:18px;flex-shrink:0}
+.ld-bar>.ld-bar-fill{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#c9a227,var(--gold),#fff3a0);box-shadow:0 0 8px rgba(255,215,0,.7);animation:ldBar 2.8s cubic-bezier(.15,.7,.2,1) forwards}
+@keyframes ldBar{0%{width:0}70%{width:78%}100%{width:100%}}
+@keyframes ldIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ld-pitch{width:min(260px,70vw);height:auto;overflow:visible}
+.ld-pitch .pl{fill:none;stroke:rgba(0,229,100,.45);stroke-width:1.4}
+.ld-sweep{position:absolute;width:min(260px,70vw);aspect-ratio:200/280;border-radius:8px;background:conic-gradient(from 0deg,transparent 0 72%,rgba(0,229,100,.28) 88%,rgba(223,255,230,.5) 92%,transparent 100%);animation:ldSweep 2.2s linear infinite;-webkit-mask:radial-gradient(circle at 50% 50%,#000 0 70%,transparent 71%);mask:radial-gradient(circle at 50% 50%,#000 0 70%,transparent 71%);pointer-events:none}
+@keyframes ldSweep{to{transform:rotate(360deg)}}
+.ld-stage{display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.ld-hex{fill:rgba(0,229,100,.1);stroke:var(--gold);stroke-width:2;stroke-linejoin:round;stroke-dasharray:280;stroke-dashoffset:280;animation:ldDraw 1.15s .15s ease-out forwards}
+@keyframes ldDraw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){
+  #rrLoader *{animation:none!important}
+  #rrLoader{transition:opacity .25s ease!important}
+  .ld-word,.ld-skip{opacity:1;transform:none}
+  .ld-hex{stroke-dashoffset:0}
+  .ld-sweep{animation:none}
+  .ld-bar>.ld-bar-fill{width:100%}
+}
 </style>
+
+<div id="rrLoader" role="status" aria-label="Loading Roster Radar" aria-live="polite">
+  <div class="ld">
+    <div class="ld-bg"></div>
+    <div class="ld-stage">
+      <svg class="ld-pitch" viewBox="0 0 200 280" aria-hidden="true">
+        <rect class="pl" x="10" y="10" width="180" height="260" rx="2"/>
+        <line class="pl" x1="10" y1="140" x2="190" y2="140"/>
+        <circle class="pl" cx="100" cy="140" r="28"/>
+        <circle class="pl" cx="100" cy="140" r="2.2" fill="rgba(0,229,100,.7)" stroke="none"/>
+        <rect class="pl" x="50" y="10" width="100" height="46"/>
+        <rect class="pl" x="70" y="10" width="60" height="20"/>
+        <rect class="pl" x="50" y="224" width="100" height="46"/>
+        <rect class="pl" x="70" y="250" width="60" height="20"/>
+        <path class="pl" d="M78 56a28 28 0 0 0 44 0"/>
+        <path class="pl" d="M78 224a28 28 0 0 1 44 0"/>
+      </svg>
+      <div class="ld-sweep"></div>
+      <svg class="ld-radar" viewBox="0 0 120 120" width="132" height="132" aria-hidden="true" style="position:absolute">
+        <polygon fill="none" stroke="rgba(0,229,100,.18)" stroke-width="1" points="60,10 103,35 103,85 60,110 17,85 17,35"/>
+        <polygon fill="none" stroke="rgba(0,229,100,.12)" stroke-width="1" points="60,30 88,46 88,74 60,90 32,74 32,46"/>
+        <polygon class="ld-hex" points="60,18 96,42 86,86 60,102 28,80 32,40"/>
+      </svg>
+    </div>
+    <div class="ld-word">Roster<em>Radar</em></div>
+    <div class="ld-bar"><span class="ld-bar-fill"></span></div>
+    <div class="ld-skip">Tap to skip</div>
+  </div>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('rrLoader');
+  if(!el||document.documentElement.classList.contains('rr-loader-skip'))return;
+  var start=performance.now(),gone=false,ready=false,MIN=1200,MAX=3000,FADE=340;
+  function dismiss(){
+    if(gone)return;gone=true;
+    try{sessionStorage.setItem('cc_loader_seen','1')}catch(e){}
+    el.classList.add('is-out');
+    el.setAttribute('aria-hidden','true');
+    setTimeout(function(){if(el&&el.parentNode)el.parentNode.removeChild(el)},FADE+30);
+  }
+  function maybe(){if(!gone&&ready&&performance.now()-start>=MIN)dismiss()}
+  window.__rrLoaderReady=function(){ready=true;maybe()};
+  el.addEventListener('click',dismiss);
+  setTimeout(maybe,MIN);
+  setTimeout(dismiss,MAX);
+})();
+</script>
 
 <!-- AUTH SCREEN -->
 <!-- SYNC MODAL -->
@@ -5421,5 +5511,6 @@ function initAuth(){
 
   checkIncomingSyncLink();
   initAuth();
+  if(window.__rrLoaderReady)window.__rrLoaderReady();
 })();
 </script>
