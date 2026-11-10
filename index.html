@@ -1167,12 +1167,12 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
 
 /* Arena / stadium */
 .fut-arena{flex:1;min-height:0;position:relative;overflow:hidden;background:#0b0d0a}
-.fut-stands{position:absolute;inset:0;pointer-events:none;z-index:0}
-.fut-stands svg{width:100%;height:100%;display:block;object-fit:cover}
-.fut-flare{position:absolute;left:10%;right:10%;top:-12%;height:38%;pointer-events:none;z-index:2;
-  background:radial-gradient(ellipse 55% 70% at 50% 0%,rgba(255,236,180,.6) 0%,rgba(255,210,120,.18) 32%,transparent 72%);}
-.fut-persp{position:absolute;inset:0;z-index:3;perspective:780px;perspective-origin:50% 100%;display:flex;align-items:flex-end;justify-content:center;padding:6px 2px 4px;--fut-tilt:55deg}
-.fut-world{position:relative;width:104%;height:165%;transform:rotateX(var(--fut-tilt));transform-style:preserve-3d;transform-origin:50% 100%;will-change:transform}
+.fut-stands{position:absolute;left:0;right:0;top:0;height:56px;pointer-events:none;z-index:0;overflow:hidden}
+.fut-stands svg{width:100%;height:140%;display:block;object-fit:cover;object-position:center top}
+.fut-flare{position:absolute;left:8%;right:8%;top:-10%;height:72px;pointer-events:none;z-index:2;
+  background:radial-gradient(ellipse 55% 80% at 50% 0%,rgba(255,236,180,.55) 0%,rgba(255,210,120,.16) 40%,transparent 74%);}
+.fut-persp{position:absolute;left:0;right:0;bottom:0;top:40px;z-index:3;perspective:1200px;perspective-origin:50% 100%;display:flex;align-items:flex-end;justify-content:center;padding:0 3px 2px;--fut-tilt:28deg}
+.fut-world{position:relative;width:100%;height:112%;transform:rotateX(var(--fut-tilt));transform-style:preserve-3d;transform-origin:50% 100%;will-change:transform}
 .fut-surface{position:absolute;inset:0;border-radius:3px;overflow:hidden;
   background-color:#3d8a3a;
   background-image:repeating-linear-gradient(180deg,#3d8a3a 0,#3d8a3a 10%,#347a32 10%,#347a32 20%);
@@ -1182,15 +1182,15 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
 .fut-corner{position:absolute;width:2px;height:2px;pointer-events:none;opacity:0}
 .fut-corner[data-c="tl"]{left:0;top:0}.fut-corner[data-c="tr"]{left:100%;top:0}
 .fut-corner[data-c="br"]{left:100%;top:100%}.fut-corner[data-c="bl"]{left:0;top:100%}
-.fut-pos-lab{position:absolute;transform:translate(-50%,10px);font-family:var(--font-display);font-size:10px;letter-spacing:1.1px;color:rgba(255,255,255,.88);text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 6px rgba(0,0,0,.6);pointer-events:none;z-index:1;text-transform:uppercase}
-.pitch-slot{position:absolute;transform:translate(-50%,-50%);width:36px;height:48px;border:1.5px dashed rgba(255,255,255,.32);border-radius:4px;pointer-events:none;background:rgba(255,255,255,.03)}
+.fut-pos-lab{position:absolute;transform:translate(-50%,12px);font-family:var(--font-display);font-size:11px;letter-spacing:1.1px;color:rgba(255,255,255,.88);text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 6px rgba(0,0,0,.6);pointer-events:none;z-index:1;text-transform:uppercase}
+.pitch-slot{position:absolute;transform:translate(-50%,-50%);width:48px;height:62px;border:1.5px dashed rgba(255,255,255,.32);border-radius:4px;pointer-events:none;background:rgba(255,255,255,.03)}
 .pitch-slot.hot{border-color:#00E564;background:rgba(0,229,100,.22);box-shadow:0 0 12px rgba(0,229,100,.35)}
 .chem-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
-.fut-shade{position:absolute;left:50%;width:28px;height:10px;border-radius:50%;background:rgba(0,0,0,.38);transform:translate(-50%,-30%);pointer-events:none;z-index:1;filter:none}
+.fut-shade{position:absolute;left:50%;width:36px;height:12px;border-radius:50%;background:rgba(0,0,0,.38);transform:translate(-50%,-30%);pointer-events:none;z-index:1;filter:none}
 
 /* Standing mini cards on the pitch */
-.fut-pcard{position:absolute;width:50px;transform:translate(-50%,-100%) rotateX(calc(-1 * var(--fut-tilt))) translateZ(2px);transform-origin:50% 100%;pointer-events:all;cursor:grab;touch-action:none;z-index:2;filter:none}
-.fut-pcard .fc{width:100%;aspect-ratio:2/2.42;cursor:grab}
+.fut-pcard{position:absolute;width:70px;transform:translate(-50%,-100%) rotateX(calc(-1 * var(--fut-tilt))) translateZ(2px);transform-origin:50% 100%;pointer-events:all;cursor:grab;touch-action:none;z-index:2;filter:none}
+.fut-pcard .fc{width:100%;aspect-ratio:2/2.22;cursor:grab}
 .fut-pcard .fc:hover{transform:none}
 .fut-pcard .fc::before{filter:none;background:rgba(0,0,0,.4);inset:8% 6% -2%;border-radius:2px}
 .fut-pcard .fc-inform::before{filter:none;animation:none;background:rgba(0,229,100,.7);box-shadow:0 0 12px rgba(0,229,100,.85)}
@@ -1200,12 +1200,12 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
 .fc-pk .fc-stats,.fc-pk .fc-badges,.fc-pk .fc-num,.fc-pk .fc-tag{display:none}
 .fc-pk .fc-in{padding:8% 6% 16%}
 .fc-pk .fc-top{left:8%;top:7%}
-.fc-pk .fc-ovr{font-size:15px;letter-spacing:0}
-.fc-pk .fc-pos{font-size:7px;margin-top:1px;font-weight:900}
+.fc-pk .fc-ovr{font-size:19px;letter-spacing:0}
+.fc-pk .fc-pos{font-size:9px;margin-top:1px;font-weight:900}
 .fc-pk .fc-portrait{width:58%;margin-left:26%;margin-top:8%}
-.fc-pk .fc-init{font-size:10px;border-width:1px;margin-bottom:4%}
+.fc-pk .fc-init{font-size:13px;border-width:1.5px;margin-bottom:4%}
 .fc-pk .fc-sil{inset:8% 8% 0}
-.fc-pk .fc-banner{font-size:7px;padding:1px 2px;margin-top:0;letter-spacing:.4px;position:absolute;bottom:16%;left:-5%;width:110%}
+.fc-pk .fc-banner{font-size:9px;padding:2px 3px;margin-top:0;letter-spacing:.4px;position:absolute;bottom:16%;left:-5%;width:110%}
 .pitch-overlay{position:absolute;inset:0;pointer-events:none;transform-style:preserve-3d}
 
 /* Bottom SUB / RES strip */
@@ -1234,17 +1234,18 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
   .fut-hud-bar{display:none}
   .fut-panels{display:flex!important;position:absolute;inset:12px 12px auto;z-index:8;margin:0;pointer-events:none;justify-content:space-between}
   .fut-panel{pointer-events:all;width:200px;flex:0 0 200px;background:rgba(8,10,10,.88)}
-  .fut-persp{padding:8px 210px 8px;--fut-tilt:56deg;perspective:900px}
-  .fut-world{width:108%;height:170%}
-  .fut-pcard{width:56px}
-  .fc-pk .fc-ovr{font-size:17px}
-  .fc-pk .fc-pos{font-size:8px}
-  .fc-pk .fc-banner{font-size:8px}
+  .fut-stands{height:64px}
+  .fut-persp{top:48px;padding:0 210px 8px;--fut-tilt:28deg;perspective:1400px}
+  .fut-world{width:100%;height:114%}
+  .fut-pcard{width:78px}
+  .fc-pk .fc-ovr{font-size:22px}
+  .fc-pk .fc-pos{font-size:10px}
+  .fc-pk .fc-banner{font-size:11px}
   .fut-subres{padding:8px 80px 12px}
 }
 @media (min-width:1280px){
-  .fut-pcard{width:60px}
-  .fut-persp{--fut-tilt:57deg;perspective:1000px}
+  .fut-pcard{width:84px}
+  .fut-persp{--fut-tilt:30deg;perspective:1500px}
 }
 /* Landscape phones / short screens */
 @media (orientation:landscape) and (max-height:500px){
@@ -1257,13 +1258,15 @@ html,body,.fc,button,input,select,textarea{font-family:var(--font-body)}
   .fut-hud-bar{padding:2px 6px}
   .fut-hud-chip b{font-size:13px}
   .fut-regular.hud-open .fut-panels{max-height:36vh;overflow:auto}
-  .fut-persp{padding:2px 4px 2px;--fut-tilt:48deg;perspective:640px}
-  .fut-world{width:100%;height:175%}
-  .fut-pcard{width:34px}
-  .fc-pk .fc-ovr{font-size:10px}
-  .fc-pk .fc-banner{font-size:5.5px}
-  .fc-pk .fc-pos{font-size:5.5px}
-  .fut-pos-lab{font-size:6px}
+  .fut-stands{height:36px}
+  .fut-flare{height:48px}
+  .fut-persp{top:28px;padding:0 4px 2px;--fut-tilt:24deg;perspective:900px}
+  .fut-world{width:100%;height:112%}
+  .fut-pcard{width:48px}
+  .fc-pk .fc-ovr{font-size:13px}
+  .fc-pk .fc-banner{font-size:7px}
+  .fc-pk .fc-pos{font-size:7px}
+  .fut-pos-lab{font-size:8px}
   .fut-subres{padding:2px 0 2px}
   .fut-empty{height:48px;flex-basis:36px}
   .fut-subres .sb-card{flex-basis:42px}
@@ -2379,19 +2382,19 @@ function fifaCardHtml(p,opts={}){
    so old saved data and the Match-mode buttons keep working. ── */
 const FC_FORMATIONS={
   '11v11':{
-    defensive:{name:'4-4-2',slots:[['GK',50,88],['LB',13,70],['CB',37,74],['CB',63,74],['RB',87,70],['LM',13,46],['CM',37,50],['CM',63,50],['RM',87,46],['ST',36,22],['ST',64,22]]},
-    balanced:{name:'4-3-3',slots:[['GK',50,88],['LB',13,70],['CB',37,74],['CB',63,74],['RB',87,70],['CM',25,47],['CDM',50,56],['CM',75,47],['LW',15,23],['ST',50,17],['RW',85,23]]},
-    attacking:{name:'3-5-2',slots:[['GK',50,88],['CB',24,73],['CB',50,76],['CB',76,73],['LWB',10,50],['CM',31,48],['CDM',50,58],['CM',69,48],['RWB',90,50],['ST',36,21],['ST',64,21]]}
+    defensive:{name:'4-4-2',slots:[['GK',50,96],['LB',8,70],['CB',35,75],['CB',65,75],['RB',92,70],['LM',8,44],['CM',35,50],['CM',65,50],['RM',92,44],['ST',30,13],['ST',70,13]]},
+    balanced:{name:'4-3-3',slots:[['GK',50,96],['LB',8,70],['CB',35,75],['CB',65,75],['RB',92,70],['CM',28,46],['CDM',50,56],['CM',72,46],['LW',8,15],['ST',50,11],['RW',92,15]]},
+    attacking:{name:'3-5-2',slots:[['GK',50,96],['CB',20,75],['CB',50,79],['CB',80,75],['LWB',6,49],['CM',32,46],['CDM',50,57],['CM',68,46],['RWB',94,49],['ST',30,13],['ST',70,13]]}
   },
   '9v9':{
-    defensive:{name:'3-3-2',slots:[['GK',50,88],['CB',22,72],['CB',50,75],['CB',78,72],['LM',16,47],['CM',50,51],['RM',84,47],['ST',35,22],['ST',65,22]]},
-    balanced:{name:'3-2-3',slots:[['GK',50,88],['CB',22,72],['CB',50,75],['CB',78,72],['CM',33,52],['CM',67,52],['LW',15,25],['ST',50,19],['RW',85,25]]},
-    attacking:{name:'2-3-3',slots:[['GK',50,88],['CB',32,73],['CB',68,73],['LM',15,50],['CM',50,53],['RM',85,50],['LW',16,25],['ST',50,19],['RW',84,25]]}
+    defensive:{name:'3-3-2',slots:[['GK',50,96],['CB',18,74],['CB',50,78],['CB',82,74],['LM',12,46],['CM',50,52],['RM',88,46],['ST',30,14],['ST',70,14]]},
+    balanced:{name:'3-2-3',slots:[['GK',50,96],['CB',18,74],['CB',50,78],['CB',82,74],['CM',30,52],['CM',70,52],['LW',10,16],['ST',50,12],['RW',90,16]]},
+    attacking:{name:'2-3-3',slots:[['GK',50,96],['CB',28,76],['CB',72,76],['LM',10,50],['CM',50,53],['RM',90,50],['LW',10,16],['ST',50,12],['RW',90,16]]}
   },
   '7v7':{
-    defensive:{name:'3-2-1',slots:[['GK',50,88],['CB',20,71],['CB',50,74],['CB',80,71],['CM',32,48],['CM',68,48],['ST',50,22]]},
-    balanced:{name:'2-3-1',slots:[['GK',50,88],['CB',30,72],['CB',70,72],['LM',16,48],['CM',50,51],['RM',84,48],['ST',50,21]]},
-    attacking:{name:'2-1-3',slots:[['GK',50,88],['CB',30,72],['CB',70,72],['CM',50,52],['LW',18,26],['ST',50,19],['RW',82,26]]}
+    defensive:{name:'3-2-1',slots:[['GK',50,96],['CB',16,74],['CB',50,78],['CB',84,74],['CM',28,48],['CM',72,48],['ST',50,15]]},
+    balanced:{name:'2-3-1',slots:[['GK',50,96],['CB',26,74],['CB',74,74],['LM',10,48],['CM',50,52],['RM',90,48],['ST',50,14]]},
+    attacking:{name:'2-1-3',slots:[['GK',50,96],['CB',26,74],['CB',74,74],['CM',50,52],['LW',12,16],['ST',50,12],['RW',88,16]]}
   }
 };
 function fcFormation(format,slot){const f=FC_FORMATIONS[format]||FC_FORMATIONS['11v11'];return f[slot]||f.balanced;}
