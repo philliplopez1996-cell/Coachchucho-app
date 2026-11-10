@@ -112,33 +112,18 @@ html{height:-webkit-fill-available}
 
 /* ── Bottom nav (mobile only) ── */
 .bottom-nav{display:none;height:auto;min-height:64px;padding:4px 8px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--border);background:rgb(6,13,8);flex-shrink:0;gap:2px;grid-column:1/-1}
-.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;cursor:pointer;padding:6px 2px;border-radius:12px;color:var(--dim);transition:all .15s;position:relative}
-.bnav-btn.active{color:var(--green);background:rgba(0,229,100,.06)}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:transparent;cursor:pointer;padding:6px 2px;border-radius:12px;color:#5a7a64;transition:all .15s;position:relative}
+.bnav-btn.active{color:var(--text);background:transparent}
 .bnav-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
-.bnav-icon svg{width:22px;height:22px;display:block}
+.bnav-icon svg{width:22px;height:22px;display:block;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.bnav-icon svg .acc{fill:#00E564;stroke:none}
+.bnav-btn.active .bnav-icon svg{stroke:var(--text)}
+.bnav-btn.active .bnav-icon svg .acc{fill:var(--green)}
+.bnav-btn::after{content:'';position:absolute;left:50%;bottom:3px;width:22px;height:3px;border-radius:99px;background:var(--green);box-shadow:0 0 8px rgba(0,229,100,.75);transform:translateX(-50%) scaleX(0);opacity:0;transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .2s}
+.bnav-btn.active::after{transform:translateX(-50%) scaleX(1);opacity:1}
 .bnav-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
-/* A — bold filled soccer-themed glyphs */
-.bnav-a .bnav-icon svg{fill:currentColor;stroke:none}
-.bnav-a .bnav-icon svg [fill="#060d08"],.bnav-b .bnav-icon svg [fill="#060d08"]{fill:#060d08}
-.bnav-a .bnav-btn.active{background:rgba(0,229,100,.1)}
-.bnav-a .bnav-btn.active .bnav-icon{transform:translateY(-1px)}
-/* B — chunky UT glyphs + green glow on the active tab */
-.bnav-b .bnav-icon svg{fill:currentColor;stroke:none;filter:drop-shadow(0 1px 0 rgba(0,0,0,.55))}
-.bnav-b .bnav-btn{border-radius:10px;padding:7px 2px 5px}
-.bnav-b .bnav-btn.active{color:#7cffb0;background:rgba(0,229,100,.14);box-shadow:inset 0 0 0 1px rgba(0,229,100,.45),0 0 14px rgba(0,229,100,.28)}
-.bnav-b .bnav-btn.active .bnav-icon{filter:drop-shadow(0 0 5px #00E564) drop-shadow(0 0 12px rgba(0,229,100,.7))}
-.bnav-b .bnav-btn.active .bnav-lbl{text-shadow:0 0 8px rgba(0,229,100,.7)}
-/* C — minimal duotone + animated active indicator */
-.bnav-c .bnav-icon svg{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.bnav-c .bnav-icon svg .acc{fill:#00E564;stroke:none}
-.bnav-c .bnav-btn{background:transparent;color:#5a7a64}
-.bnav-c .bnav-btn.active{color:var(--text);background:transparent}
-.bnav-c .bnav-btn.active .bnav-icon svg{stroke:var(--text)}
-.bnav-c .bnav-btn.active .bnav-icon svg .acc{fill:var(--green)}
-.bnav-c .bnav-btn::after{content:'';position:absolute;left:50%;bottom:3px;width:22px;height:3px;border-radius:99px;background:var(--green);box-shadow:0 0 8px rgba(0,229,100,.75);transform:translateX(-50%) scaleX(0);opacity:0;transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .2s}
-.bnav-c .bnav-btn.active::after{transform:translateX(-50%) scaleX(1);opacity:1}
 @media (prefers-reduced-motion:reduce){
-  .bnav-c .bnav-btn::after{transition:none}
+  .bnav-btn::after{transition:none}
 }
 
 /* ── Roster: Teams List ── */
@@ -1913,22 +1898,22 @@ html.rr-loader-skip #rrLoader{display:none!important}
   </main>
 
   <!-- BOTTOM NAV (mobile) -->
-  <nav class="bottom-nav bnav-a" id="bottomNav" data-icons="A">
+  <nav class="bottom-nav" id="bottomNav">
     <button class="bnav-btn" data-view="calendar">
-      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.05 2.2 10.85a1 1 0 0 0 .62 1.78H4.5V20.2A1.6 1.6 0 0 0 6.1 21.8h3.5v-6.15h4.8V21.8h3.5a1.6 1.6 0 0 0 1.6-1.6v-7.57h1.68a1 1 0 0 0 .62-1.78L12 3.05z"/></svg></span>
+      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5h16v8.2A1.8 1.8 0 0 1 18.2 20.5H5.8A1.8 1.8 0 0 1 4 18.7v-8.2z"/><path class="acc" d="M5.6 5.2h12.8A1.6 1.6 0 0 1 20 6.8V9H4V6.8A1.6 1.6 0 0 1 5.6 5.2z"/><path d="M8 3.5v3M16 3.5v3"/></svg></span>
       <span class="bnav-lbl">Home</span>
     </button>
     <button class="bnav-btn active" data-view="roster">
-      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.05 3.15 12 5.2l3.95-2.05 2.35 2.15L20.6 7.1l-1.15 2.05V20.1A1.55 1.55 0 0 1 17.9 21.7H6.1A1.55 1.55 0 0 1 4.55 20.1V9.15L3.4 7.1l2.3-1.8 2.35-2.15zM9.15 10.4h5.7v1.55h-5.7V10.4zm0 3.15h5.7v1.55h-5.7V13.55z"/></svg></span>
+      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 4.2 12 6.1l3.8-1.9 2.1 1.9 2.2 1.6-1 1.8V19.4A1.4 1.4 0 0 1 17.7 20.8H6.3A1.4 1.4 0 0 1 4.9 19.4V9.5L3.9 7.7 6.1 6.1 8.2 4.2z"/><path class="acc" d="M8.6 11h6.8v1.5H8.6zm0 3.1h6.8v1.5H8.6z"/></svg></span>
       <span class="bnav-lbl">Roster</span>
     </button>
     <button class="bnav-btn" data-view="radar">
-      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.1a9.9 9.9 0 1 1 0 19.8 9.9 9.9 0 0 1 0-19.8zm0 2.05a7.85 7.85 0 1 0 0 15.7 7.85 7.85 0 0 0 0-15.7zm0 2.2a5.65 5.65 0 1 1 0 11.3 5.65 5.65 0 0 1 0-11.3zm0 2.15a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/><path d="M12 11.15V4.7A7.3 7.3 0 0 1 18.55 14.4L12 12.25z"/><circle cx="12" cy="12" r="1.4" fill="#060d08"/></svg></span>
+      <span class="bnav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="5.2"/><circle cx="12" cy="12" r="2"/><path class="acc" d="M12 12V4.8A7.2 7.2 0 0 1 18.3 14.1L12 12z"/></svg></span>
       <span class="bnav-lbl">Radar</span>
     </button>
     <button class="bnav-btn" data-view="pitch">
       <span class="bnav-icon bnav-pitch-wrap">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3.3 4.15h17.4A1.7 1.7 0 0 1 22.4 5.85v12.3a1.7 1.7 0 0 1-1.7 1.7H3.3a1.7 1.7 0 0 1-1.7-1.7V5.85A1.7 1.7 0 0 1 3.3 4.15zM4 5.85v12.3h16V5.85H4zm7.35 0h1.3v12.3h-1.3V5.85zM12 9.05a2.95 2.95 0 1 1 0 5.9 2.95 2.95 0 0 1 0-5.9zM5.15 8.35h3.15v2.15H5.15V8.35zm10.55 5.15h3.15v2.15h-3.15v-2.15z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="4.6" width="17.6" height="14.8" rx="1.6"/><path d="M12 4.6v14.8M3.2 12h17.6"/><circle cx="12" cy="12" r="2.5"/><path d="M3.2 8.2h3.2v3.2H3.2zm14.4 4.4h3.2v3.2h-3.2z"/><circle class="acc" cx="12" cy="12" r="1.05"/></svg>
         <span class="bnav-team-dot" id="bnavPitchDot"></span>
       </span>
       <span class="bnav-lbl">Pitch</span>
@@ -5529,53 +5514,6 @@ function initAuth(){
     else {ensureMatchStadium();renderMatchPitchTokens();renderMatchBench();}
   });
 
-
-  /* ── Bottom-nav icon styles: ?icons=A|B|C (default A) ── */
-  const NAV_ICON_SVGS={
-    A:{
-      calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.05 2.2 10.85a1 1 0 0 0 .62 1.78H4.5V20.2A1.6 1.6 0 0 0 6.1 21.8h3.5v-6.15h4.8V21.8h3.5a1.6 1.6 0 0 0 1.6-1.6v-7.57h1.68a1 1 0 0 0 .62-1.78L12 3.05z"/></svg>',
-      roster:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.05 3.15 12 5.2l3.95-2.05 2.35 2.15L20.6 7.1l-1.15 2.05V20.1A1.55 1.55 0 0 1 17.9 21.7H6.1A1.55 1.55 0 0 1 4.55 20.1V9.15L3.4 7.1l2.3-1.8 2.35-2.15zM9.15 10.4h5.7v1.55h-5.7V10.4zm0 3.15h5.7v1.55h-5.7V13.55z"/></svg>',
-      radar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.1a9.9 9.9 0 1 1 0 19.8 9.9 9.9 0 0 1 0-19.8zm0 2.05a7.85 7.85 0 1 0 0 15.7 7.85 7.85 0 0 0 0-15.7zm0 2.2a5.65 5.65 0 1 1 0 11.3 5.65 5.65 0 0 1 0-11.3zm0 2.15a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/><path d="M12 11.15V4.7A7.3 7.3 0 0 1 18.55 14.4L12 12.25z"/><circle cx="12" cy="12" r="1.4" fill="#060d08"/></svg>',
-      pitch:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3.3 4.15h17.4A1.7 1.7 0 0 1 22.4 5.85v12.3a1.7 1.7 0 0 1-1.7 1.7H3.3a1.7 1.7 0 0 1-1.7-1.7V5.85A1.7 1.7 0 0 1 3.3 4.15zM4 5.85v12.3h16V5.85H4zm7.35 0h1.3v12.3h-1.3V5.85zM12 9.05a2.95 2.95 0 1 1 0 5.9 2.95 2.95 0 0 1 0-5.9zM5.15 8.35h3.15v2.15H5.15V8.35zm10.55 5.15h3.15v2.15h-3.15v-2.15z"/></svg>'
-    },
-    B:{
-      calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2h18v9.1A2.2 2.2 0 0 1 18.8 22.5H5.2A2.2 2.2 0 0 1 3 20.3v-9.1zm1.7-6.4h3.2V3.1h2.1v1.7h3.9V3.1h2.1v1.7h3.2A2 2 0 0 1 21.2 6.8v2.7H2.8V6.8A2 2 0 0 1 4.7 4.8zM6.4 13.6h4.1v3.6H6.4v-3.6z"/></svg>',
-      roster:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.6 2.6 12 5l4.4-2.4 2.7 2.5 2.6 2.1-1.4 2.5v10.6A1.9 1.9 0 0 1 18.4 22H5.6A1.9 1.9 0 0 1 3.7 20.3V9.7L2.3 7.2l2.6-2.1 2.7-2.5zM8.2 9.6h7.6v2.1H8.2V9.6zm0 3.8h7.6v2.1H8.2v-2.1z"/></svg>',
-      radar:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.2"/><path fill="#060d08" d="M12 12V3.6A8.4 8.4 0 0 1 19.8 15.8L12 12z"/><circle cx="12" cy="12" r="2.15"/></svg>',
-      pitch:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M2.4 4.2h19.2A1.9 1.9 0 0 1 23.5 6.1v11.8a1.9 1.9 0 0 1-1.9 1.9H2.4A1.9 1.9 0 0 1 .5 17.9V6.1A1.9 1.9 0 0 1 2.4 4.2zm8.95 1.8v12h1.3v-12h-1.3zM12 8.6a3.4 3.4 0 1 1 0 6.8 3.4 3.4 0 0 1 0-6.8zM4.2 7.4h3.6v2.5H4.2V7.4zm12 6.7h3.6v2.5h-3.6v-2.5z"/></svg>'
-    },
-    C:{
-      calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5h16v8.2A1.8 1.8 0 0 1 18.2 20.5H5.8A1.8 1.8 0 0 1 4 18.7v-8.2z"/><path class="acc" d="M5.6 5.2h12.8A1.6 1.6 0 0 1 20 6.8V9H4V6.8A1.6 1.6 0 0 1 5.6 5.2z"/><path d="M8 3.5v3M16 3.5v3"/></svg>',
-      roster:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 4.2 12 6.1l3.8-1.9 2.1 1.9 2.2 1.6-1 1.8V19.4A1.4 1.4 0 0 1 17.7 20.8H6.3A1.4 1.4 0 0 1 4.9 19.4V9.5L3.9 7.7 6.1 6.1 8.2 4.2z"/><path class="acc" d="M8.6 11h6.8v1.5H8.6zm0 3.1h6.8v1.5H8.6z"/></svg>',
-      radar:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="5.2"/><circle cx="12" cy="12" r="2"/><path class="acc" d="M12 12V4.8A7.2 7.2 0 0 1 18.3 14.1L12 12z"/></svg>',
-      pitch:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="4.6" width="17.6" height="14.8" rx="1.6"/><path d="M12 4.6v14.8M3.2 12h17.6"/><circle cx="12" cy="12" r="2.5"/><path d="M3.2 8.2h3.2v3.2H3.2zm14.4 4.4h3.2v3.2h-3.2z"/><circle class="acc" cx="12" cy="12" r="1.05"/></svg>'
-    }
-  };
-  function applyNavIcons(style){
-    const nav=document.getElementById('bottomNav');
-    if(!nav)return;
-    const s=(style&&/^[ABC]$/i.test(style))?style.toUpperCase():'A';
-    nav.dataset.icons=s;
-    nav.classList.remove('bnav-a','bnav-b','bnav-c');
-    nav.classList.add('bnav-'+s.toLowerCase());
-    const pack=NAV_ICON_SVGS[s];
-    nav.querySelectorAll('.bnav-btn').forEach(btn=>{
-      const key=btn.dataset.view;
-      const svg=pack[key];
-      if(!svg)return;
-      const mount=btn.querySelector('.bnav-icon');
-      if(!mount)return;
-      const dot=mount.querySelector('.bnav-team-dot');
-      mount.querySelectorAll('svg').forEach(el=>el.remove());
-      mount.insertAdjacentHTML('afterbegin',svg);
-      if(dot)mount.appendChild(dot);
-    });
-  }
-  (function(){
-    let q='A';
-    try{const m=location.search.match(/[?&]icons=([ABC])/i);if(m)q=m[1].toUpperCase();}catch(e){}
-    applyNavIcons(q);
-  })();
 
   /* Match buttons */
   const matchStartBtn=document.getElementById('matchStartBtn');
