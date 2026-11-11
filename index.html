@@ -3983,8 +3983,10 @@ function openGamePicker(onSelect){
   const list=document.getElementById('gamePickerList');
   if(!list)return;
   const today=new Date().toISOString().slice(0,10);
-  /* All game-type events, team-filtered if active team selected */
-  const games=EVENTS.filter(ev=>ev.type==='game')
+  /* Every fixture the calendar treats as a match (incl. custom "Game day" types),
+     not yet played, active team's fixtures first */
+  const tid=activeTeam?activeTeam.id:null;
+  const games=EVENTS.filter(ev=>evIsMatch(ev)&&!ev.done&&(!tid||!ev.teamId||ev.teamId===tid))
     .sort((a,b)=>{
       /* Today first, then future ascending, then past descending */
       const ad=a.date,bd=b.date;
@@ -3995,7 +3997,7 @@ function openGamePicker(onSelect){
       return ad>=today?-1:1;
     });
   if(!games.length){
-    list.innerHTML='<div style="padding:24px 18px;text-align:center;font-size:12px;color:var(--dim);font-weight:700">No game events found.<br><span style="font-size:10px;font-weight:500">Add a game event in the Calendar tab first.</span></div>';
+    list.innerHTML='<div style="padding:24px 18px;text-align:center;font-size:12px;color:var(--dim);font-weight:700">No upcoming fixtures found.<br><span style="font-size:10px;font-weight:500">Add a game in the Calendar tab, or start without linking.</span></div>';
   } else {
     list.innerHTML=games.map(ev=>{
       const team=TEAMS.find(t=>t.id===ev.teamId);
@@ -4777,7 +4779,7 @@ function applyCoachUI(){
 function renderProfilePanel(){
   applyCoachUI();
   const totalPlayers=TEAMS.reduce((s,t)=>s+t.players.length,0);
-  const totalGames=EVENTS.filter(e=>e.type==='game'&&e.done).length;
+  const totalGames=EVENTS.filter(e=>evIsMatch(e)&&evResult(e)).length;
   const wins=TEAMS.reduce((s,t)=>{const r=getTeamRecord(t.id);return s+r.w;},0);
   const sg=document.getElementById('profileStats');
   if(sg)sg.innerHTML=[['Teams',TEAMS.length],['Players',totalPlayers],['Games',totalGames],['Wins',wins]].map(([l,v])=>`<div class="profile-stat"><div class="ps-val">${v}</div><div class="ps-lbl">${l}</div></div>`).join('');
@@ -4786,7 +4788,7 @@ function renderProfilePanel(){
     const col=t.color||'#00E564';const rec=getTeamRecord(t.id);
     return `<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)">
       <div style="width:32px;height:32px;border-radius:8px;background:${col}18;border:1px solid ${col}44;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:13px;color:${col}">${t.initial}</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:700;color:#DFF0E3">${t.name}</div><div style="font-size:10px;color:#6B9A78">${t.players.length} players · ${rec.w}W ${rec.l}L ${rec.t}T</div></div>
+      <div style="flex:1"><div style="font-size:12px;font-weight:700;color:#DFF0E3">${t.name}</div><div style="font-size:10px;color:#6B9A78">${t.players.length} players · ${rec.w}W ${rec.l}L ${rec.t}D</div></div>
     </div>`;
   }).join('');
 
@@ -4870,7 +4872,8 @@ function buildStats(){
     return;
   }
   const rec=getTeamRecord(team.id);
-  const games=EVENTS.filter(e=>e.type==='game'&&e.teamId===team.id&&e.done);
+  /* Same match rule as Home/menu: evIsMatch() covers custom "Game day" types */
+  const games=EVENTS.filter(e=>e.teamId===team.id&&evIsMatch(e)&&evResult(e));
   const winPct=games.length>0?Math.round((rec.w/games.length)*100):0;
   const gd=rec.gf-rec.ga;
   const recentGames=[...games].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
@@ -4884,14 +4887,14 @@ function buildStats(){
   </div>`:'';;
 
   const formChips=recentGames.length>0?recentGames.map(g=>{
-    const r=g.homeScore>g.awayScore?'W':g.homeScore<g.awayScore?'L':'T';
+    const r=evResult(g);
     const c=r==='W'?'var(--green)':r==='L'?'var(--red)':'var(--gold)';
     const bg=r==='W'?'rgba(0,229,100,.15)':r==='L'?'rgba(255,96,96,.15)':'rgba(255,215,0,.15)';
     return `<span style="width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:${bg};border:1.5px solid ${c};color:${c};font-size:13px;font-weight:900;font-family:var(--font-display)">${r}</span>`;
   }).join(''):'<span style="font-size:11px;color:var(--dim)">No completed games yet</span>';
 
   const formList=recentGames.length>0?`<div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">${recentGames.map(g=>{
-    const r=g.homeScore>g.awayScore?'W':g.homeScore<g.awayScore?'L':'T';
+    const r=evResult(g);
     const c=r==='W'?'var(--green)':r==='L'?'var(--red)':'var(--gold)';
     const d=g.date?new Date(g.date+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
     return `<div style="display:flex;align-items:center;gap:8px;font-size:10px"><span style="font-weight:900;color:${c};min-width:12px">${r}</span><span style="font-variant-numeric:tabular-nums;color:var(--text);font-weight:700">${g.homeScore}–${g.awayScore}</span><span style="color:var(--dim);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${g.title||'Game'}</span><span style="color:var(--dim);flex-shrink:0">${d}</span></div>`;
